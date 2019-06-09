@@ -12,6 +12,14 @@ This repository mostly includes folders and [submodules](https://git-scm.com/boo
 
 ### Setup and usage of this repository
 
+- ```sudo apt update```
+- ```
+sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins
+```
+- ```https://github.com/KTHFSDV/as1819.git```
+- ```git submodule update --init```
+- ```catkin build```
+
 
 ### Updating this repository
 *This section is mostly relevant for the leads and software architecture members that will update this repository. Otherwise just stick to guideline above on how to use this repository easily setup your ROS workspace.*

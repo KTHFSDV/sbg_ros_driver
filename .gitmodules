@@ -22,3 +22,6 @@
 [submodule "simulation"]
 	path = simulation
 	url = https://github.com/KTHFSDV/simulation.git
+[submodule "gnss_utils"]
+	path = gnss_utils
+	url = https://github.com/KTHFSDV/gnss_utils.git
