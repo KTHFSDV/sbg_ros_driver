@@ -16,9 +16,6 @@
 [submodule "perception/cone_detection_lidar"]
 	path = perception/cone_detection_lidar
 	url = https://github.com/KTHFSDV/cone_detection_lidar.git
-[submodule "communication/ros2udp"]
-	path = communication/ros2udp
-	url = https://github.com/KTHFSDV/ros2udp.git
 [submodule "simulation"]
 	path = simulation
 	url = https://github.com/KTHFSDV/simulation.git
