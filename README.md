@@ -13,11 +13,22 @@ This repository mostly includes folders and [submodules](https://git-scm.com/boo
 ### Setup and usage of this repository
 
 - ```sudo apt update```
-- ```sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins python-scipy python-pip```
+- ```sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-dev-qt5 freeglut3-dev qtbase5-dev```
 - ```pip install python-can```
 - ```https://github.com/KTHFSDV/as1819.git```
 - ```git submodule update --init```
 - ```catkin build -DCMAKE_BUILD_TYPE=Release```
+- ```./ZED_SDK_Linux_*.run``` [download](https://download.stereolabs.com/zedsdk/2.8/jetson_jp42) and run Zed SDK
+- ```sudo apt install ros-melodic-cv-bridge ros-melodic-image-geometry ``` if purging and installing [opencv 3.4.2 for xavier](https://www.jetsonhacks.com/2018/11/08/build-opencv-3-4-on-nvidia-jetson-agx-xavier-developer-kit/) for calibration or zed
+
+
+Installing OpenCV 3.4.2 (required for calibration):
+- cd /tmp/
+- ```git clone https://github.com/jetsonhacks/buildOpenCVXavier.git```
+- cd buildOpenCVXavier
+- Edit buildAndPackageOpenCV.sh and change the line OPENCV_VERSION=3.4.3 to OPENCV_VERSION=3.4.2
+- ./buildAndPackageOpenCV.sh
+- ./removeOpenCVSources.sh
 
 
 ### Updating this repository

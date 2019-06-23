@@ -22,3 +22,6 @@
 [submodule "gnss_utils"]
 	path = gnss_utils
 	url = https://github.com/KTHFSDV/gnss_utils.git
+[submodule "communication"]
+	path = communication
+	url = https://github.com/KTHFSDV/communication.git
