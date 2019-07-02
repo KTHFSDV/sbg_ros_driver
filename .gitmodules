@@ -25,3 +25,9 @@
 [submodule "communication"]
 	path = communication
 	url = https://github.com/KTHFSDV/communication.git
+[submodule "vehicle"]
+	path = vehicle
+	url = https://github.com/KTHFSDV/vehicle.git
+[submodule "navigation/mpc"]
+	path = navigation/mpc
+	url = https://github.com/KTHFSDV/mpc.git

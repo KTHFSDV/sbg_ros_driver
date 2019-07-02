@@ -13,7 +13,7 @@ This repository mostly includes folders and [submodules](https://git-scm.com/boo
 ### Setup and usage of this repository
 
 - ```sudo apt update```
-- ```sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-dev-qt5 freeglut3-dev qtbase5-dev```
+- ```sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-dev-qt5 freeglut3-dev qtbase5-dev libqglviewer-dev ros-melodic-joint-state-publisher ros-melodic-robot-state-publisher ros-melodic-robot-localization ros-melodic-rqt ros-melodic-rqt-graph```
 - ```pip install python-can```
 - ```https://github.com/KTHFSDV/as1819.git```
 - ```git submodule update --init```
@@ -29,6 +29,11 @@ Installing OpenCV 3.4.2 (required for calibration):
 - Edit buildAndPackageOpenCV.sh and change the line OPENCV_VERSION=3.4.3 to OPENCV_VERSION=3.4.2
 - ./buildAndPackageOpenCV.sh
 - ./removeOpenCVSources.sh
+
+## Building mpc files
+- ```roscd mpc/resources/cvxgen_solver_sources```
+- ```make clean```
+- ```make```
 
 
 ### Updating this repository
