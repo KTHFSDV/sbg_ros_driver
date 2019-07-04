@@ -40,6 +40,7 @@
 [submodule "navigation/mpc"]
 	path = navigation/mpc
 	url = https://github.com/KTHFSDV/mpc.git
+	branch = dev
 [submodule "sensors/zed-ros-wrapper"]
 	path = sensors/zed-ros-wrapper
 	url = https://github.com/stereolabs/zed-ros-wrapper.git
