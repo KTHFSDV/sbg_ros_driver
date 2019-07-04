@@ -1,33 +1,42 @@
 [submodule "slam"]
 	path = slam
 	url = https://github.com/KTHFSDV/slam.git
+	branch = devel
 [submodule "perception/cone_detection_camera"]
 	path = perception/cone_detection_camera
 	url = https://github.com/KTHFSDV/cone_detection_camera.git
+	branch = dev
 [submodule "fs_msgs"]
 	path = fs_msgs
 	url = https://github.com/KTHFSDV/fs_msgs.git
+	branch = master
 [submodule "navigation/controller"]
 	path = navigation/controller
 	url = https://github.com/KTHFSDV/controller.git
 [submodule "navigation/path_planner"]
 	path = navigation/path_planner
 	url = https://github.com/KTHFSDV/path_planner.git
+	branch = dev
 [submodule "perception/cone_detection_lidar"]
 	path = perception/cone_detection_lidar
 	url = https://github.com/KTHFSDV/cone_detection_lidar.git
+	branch = devel
 [submodule "simulation"]
 	path = simulation
 	url = https://github.com/KTHFSDV/simulation.git
+	branch = dev
 [submodule "gnss_utils"]
 	path = gnss_utils
 	url = https://github.com/KTHFSDV/gnss_utils.git
+	branch = devel
 [submodule "communication"]
 	path = communication
 	url = https://github.com/KTHFSDV/communication.git
+	branch = devel
 [submodule "vehicle"]
 	path = vehicle
 	url = https://github.com/KTHFSDV/vehicle.git
+	branch = devel
 [submodule "navigation/mpc"]
 	path = navigation/mpc
 	url = https://github.com/KTHFSDV/mpc.git
