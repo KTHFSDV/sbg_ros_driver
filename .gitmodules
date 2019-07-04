@@ -32,7 +32,7 @@
 [submodule "communication"]
 	path = communication
 	url = https://github.com/KTHFSDV/communication.git
-	branch = devel
+	branch = dev
 [submodule "vehicle"]
 	path = vehicle
 	url = https://github.com/KTHFSDV/vehicle.git
