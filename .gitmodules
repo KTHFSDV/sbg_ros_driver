@@ -5,18 +5,19 @@
 [submodule "perception/cone_detection_camera"]
 	path = perception/cone_detection_camera
 	url = https://github.com/KTHFSDV/cone_detection_camera.git
-	branch = dev
+	branch = devel
 [submodule "fs_msgs"]
 	path = fs_msgs
 	url = https://github.com/KTHFSDV/fs_msgs.git
-	branch = master
+	branch = devel
 [submodule "navigation/controller"]
 	path = navigation/controller
 	url = https://github.com/KTHFSDV/controller.git
+	branch = devel
 [submodule "navigation/path_planner"]
 	path = navigation/path_planner
 	url = https://github.com/KTHFSDV/path_planner.git
-	branch = dev
+	branch = devel
 [submodule "perception/cone_detection_lidar"]
 	path = perception/cone_detection_lidar
 	url = https://github.com/KTHFSDV/cone_detection_lidar.git
@@ -24,7 +25,7 @@
 [submodule "simulation"]
 	path = simulation
 	url = https://github.com/KTHFSDV/simulation.git
-	branch = dev
+	branch = devel
 [submodule "gnss_utils"]
 	path = gnss_utils
 	url = https://github.com/KTHFSDV/gnss_utils.git
@@ -32,7 +33,7 @@
 [submodule "communication"]
 	path = communication
 	url = https://github.com/KTHFSDV/communication.git
-	branch = dev
+	branch = devel
 [submodule "vehicle"]
 	path = vehicle
 	url = https://github.com/KTHFSDV/vehicle.git
@@ -40,7 +41,7 @@
 [submodule "navigation/mpc"]
 	path = navigation/mpc
 	url = https://github.com/KTHFSDV/mpc.git
-	branch = dev
+	branch = devel
 [submodule "sensors/zed-ros-wrapper"]
 	path = sensors/zed-ros-wrapper
 	url = https://github.com/stereolabs/zed-ros-wrapper.git
