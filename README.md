@@ -56,11 +56,6 @@ Installing OpenCV 3.4.2 (required for calibration):
 - ./buildAndPackageOpenCV.sh
 - ./removeOpenCVSources.sh
 
-## Building mpc files
-- ```roscd mpc/resources/cvxgen_solver_sources```
-- ```make clean```
-- ```make```
-
 
 ### Developing with this repository
 When you want to get the latest changes, go at the root of this repository and use:
