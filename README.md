@@ -30,12 +30,18 @@ pip install --upgrade pip
   - ```pip install --user python-can==3.0.0 rdp osqp pathlib```
   - ```pip install --user --upgrade numpy```
 
-- If on laptop with Cuda 10.1 or on the Xavier:
-  - ```pip install TODO```
+#### Pytorch ####
+
+- For the Nvidia Xavier, instructions are taken from [here](https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-5-0-now-available/72048). The following instructions assume Pytorch 1.4.0, Cuda 10.0, JetPack 4.3 and Python 2.7 (use the link if other setups are used):
+  - ```wget https://nvidia.box.com/shared/static/1v2cc4ro6zvsbu0p8h6qcuaqco1qcsif.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl```
+  - ```sudo apt-get install libopenblas-base libopenmpi-dev ```
+  - ```pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl```
 
 - If on a laptop without Cuda:
   - ```pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html```
   - ```catkin config --blacklist zed_wrapper```
+
+#### Cloning and building this repository ####
 
 - (Xavier only) In the .bashrc file, add: `export OPEN_BLAS_NUM_THREADS=1`. This prevents weird bugs with multithreading with Numpy.
 
