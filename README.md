@@ -14,7 +14,7 @@ This repository mostly includes folders and [submodules](https://git-scm.com/boo
 
 To avoid most issues installing some libraries with pip (in particular scipy: see [thread](https://stackoverflow.com/questions/26575587/cant-install-scipy-through-pip)), update pip to the latest version:
 
-```    
+```
 pip install --upgrade pip
 ```
 
@@ -51,7 +51,7 @@ pip install --upgrade pip
 
 
 Additional packages:
-- ```./ZED_SDK_Linux_*.run``` [download](https://download.stereolabs.com/zedsdk/2.8/jetson_jp42) and run Zed SDK
+- ```./ZED_SDK_Linux_*.run``` [download](https://download.stereolabs.com/zedsdk/3.1/jp43/jetsons) and run Zed SDK
 - ```sudo apt install ros-melodic-cv-bridge ros-melodic-image-geometry ``` if purging and installing [opencv 3.4.2 for xavier](https://www.jetsonhacks.com/2018/11/08/build-opencv-3-4-on-nvidia-jetson-agx-xavier-developer-kit/) for calibration or zed
 
 Installing OpenCV 3.4.2 (required for calibration):
