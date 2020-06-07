@@ -21,13 +21,13 @@ pip install --upgrade pip
 - For Ubuntu 18.04:
   - ```sudo apt update```
   - ```sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-plugins ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 ros-melodic-joint-state-publisher ros-melodic-robot-state-publisher ros-melodic-robot-localization ros-melodic-rqt ros-melodic-rqt-graph ros-melodic-roslint ros-melodic-urdfdom-py ros-melodic-ros-numpy doxygen```
-  - ```pip install --user python-can rdp osqp pathlib```
+  - ```pip install --user python-can cantools rdp osqp pathlib```
 
 
 - For Ubuntu 16.04:
   - ```sudo apt update```
   - ```sudo apt install ros-kinetic-ackermann-msgs ros-kinetic-twist-mux ros-kinetic-joy ros-kinetic-controller-manager ros-kinetic-velodyne-simulator ros-kinetic-effort-controllers ros-kinetic-velocity-controllers ros-kinetic-joint-state-controller ros-kinetic-gazebo-ros-control ros-kinetic-teleop-twist-keyboard ros-kinetic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-dev freeglut3-dev qtbase5-dev ros-kinetic-joint-state-publisher ros-kinetic-robot-state-publisher ros-kinetic-robot-localization ros-kinetic-rqt ros-kinetic-rqt-graph ros-kinetic-roslint ros-kinetic-urdfdom-py ros-kinetic-ros-numpy doxygen```
-  - ```pip install --user python-can==3.0.0 rdp osqp pathlib```
+  - ```pip install --user python-can==3.0.0 cantools rdp osqp pathlib```
   - ```pip install --user --upgrade numpy```
 
 #### Pytorch ####
