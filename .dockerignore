@@ -1,0 +1,31 @@
+# ignore .git and .cache folders
+.git
+.gitmodules
+.cache
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Files used for development, which don't need to run catkin build again
+**/*.yaml
+**/*.launch
+**/*.xacro
+**/*.py
+
+# Folder with weights files
+**/weights
+
+# Keep track of setup.py changes (used for catkin build)
+!**/setup.py
+
