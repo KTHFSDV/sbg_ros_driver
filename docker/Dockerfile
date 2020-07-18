@@ -2,7 +2,7 @@ FROM ros:melodic as base
 
 RUN apt-get update && apt-get install -y python-catkin-tools python-scipy python-pip \
     libopencv-dev libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 doxygen \
-    ros-melodic-rviz
+    libpcl-dev ros-melodic-rviz
 
 RUN pip install --upgrade pip
 
@@ -18,58 +18,59 @@ ENV ROS_WORKSPACE=/home/fs_workspace/
 
 FROM base as fs_msgs
 WORKDIR $ROS_WORKSPACE
-COPY ./fs_msgs/ src/fs_msgs
+COPY ./fs_msgs src/fs_msgs/
 RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
 FROM base as fs_simulation
 WORKDIR $ROS_WORKSPACE
-COPY ./simulation/fs_simulation src/simulation/fs_simulation
+COPY ./simulation src/simulation/
 RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
 FROM base as gnss_utils
 WORKDIR $ROS_WORKSPACE
-COPY ./gnss_utils/ src/gnss_utils/
+COPY ./gnss_utils src/gnss_utils/
 RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
 FROM base as controller
 WORKDIR $ROS_WORKSPACE
-COPY ./navigation/controller/ src/navigation/controller/
+COPY ./navigation/controller src/navigation/controller/
 RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
 FROM base as path_planner
 WORKDIR $ROS_WORKSPACE
-COPY ./navigation/path_planner/ src/navigation/path_planner
+COPY ./navigation/path_planner src/navigation/path_planner/
 RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
 FROM base as perception
 WORKDIR $ROS_WORKSPACE
-COPY ./perception/ src/perception/
+COPY ./fs_msgs src/fs_msgs/
+COPY ./perception src/perception/
 RUN rosdep install --from-paths src --ignore-src -r -y
-RUN catkin config --blacklist zed_wrapper depth_clustering
+RUN catkin config --blacklist zed_wrapper
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
 FROM base as slam
 WORKDIR $ROS_WORKSPACE
-COPY ./fs_msgs/ src/fs_msgs
-COPY ./slam/ src/slam/
+COPY ./fs_msgs src/fs_msgs/
+COPY ./slam src/slam/
 RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
 FROM base as vehicle
 WORKDIR $ROS_WORKSPACE
-COPY ./vehicle/ src/vehicle/
+COPY ./vehicle src/vehicle/
 RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
