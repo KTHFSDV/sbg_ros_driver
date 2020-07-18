@@ -1,12 +1,12 @@
-.PHONY: init, roscore, roslaunch
+.PHONY: build, roscore, roslaunch
 
-init:
+build:
 	docker build -t as2021 -f docker/Dockerfile .
 
-roscore: init
+roscore:
 	docker run -it --name=as2021 --rm --net=host as2021 bash -c "roscore"
 
-roslaunch: init
+roslaunch:
 	export LIBGL_ALWAYS_SOFTWARE=1
 	docker run -it \
 		--name=as2021 \
