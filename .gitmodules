@@ -10,14 +10,6 @@
 	path = fs_msgs
 	url = https://github.com/KTHFSDV/fs_msgs.git
 	branch = devel
-[submodule "navigation/controller"]
-	path = navigation/controller
-	url = https://github.com/KTHFSDV/controller.git
-	branch = devel
-[submodule "navigation/path_planner"]
-	path = navigation/path_planner
-	url = https://github.com/KTHFSDV/path_planner.git
-	branch = devel
 [submodule "perception/cone_detection_lidar"]
 	path = perception/cone_detection_lidar
 	url = https://github.com/KTHFSDV/cone_detection_lidar.git
