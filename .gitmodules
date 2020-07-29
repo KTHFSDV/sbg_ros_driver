@@ -26,3 +26,9 @@
 	path = sensors/zed-ros-wrapper
 	url = https://github.com/stereolabs/zed-ros-wrapper.git
 	branch = master
+[submodule "navigation"]
+	path = navigation
+	url = https://github.com/KTHFSDV/navigation.git
+[submodule "perception"]
+	path = perception
+	url = https://github.com/KTHFSDV/perception.git
