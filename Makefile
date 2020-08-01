@@ -1,4 +1,4 @@
-.PHONY: build, roscore, roslaunch
+.PHONY: build, roscore, roslaunch, rqt, rviz
 
 build:
 	docker build -t as2021 -f docker/Dockerfile .
@@ -28,7 +28,7 @@ roslaunch:
 rqt:
 	docker run -it \
 		--gpus all \
-		--name=as2021 \
+		--name=as2021-rqt \
     	--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
 		--env="LIBGL_ALWAYS_INDIRECT=0" \
