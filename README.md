@@ -115,28 +115,40 @@ pip install --user python-can cantools==32.20.1 rdp osqp pathlib && pip install 
 
 4. Install PyTorch for the Nvidia Xavier. Instructions are taken from [here](https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-5-0-now-available/72048). The following instructions assume Pytorch 1.4.0, Cuda 10.0, JetPack 4.3 and Python 2.7 (use the link if other setups are used):
 
-  - ```wget https://nvidia.box.com/shared/static/1v2cc4ro6zvsbu0p8h6qcuaqco1qcsif.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl```
-  - ```sudo apt-get install libopenblas-base libopenmpi-dev ```
-  - ```pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl```
+```
+wget https://nvidia.box.com/shared/static/1v2cc4ro6zvsbu0p8h6qcuaqco1qcsif.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+sudo apt-get install libopenblas-base libopenmpi-dev
+pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+```
 
 5. Add `export OPEN_BLAS_NUM_THREADS=1` to the .bashrc file to prevent bugs with multithreading with numpy.
 
-6. Clone this repository and initialize the submodules
+6. Create a catkin workspace with catkin-tools
+
+```
+mkdir src
+catkin init
+cd src
+```
+
+7. Clone this repository (inside the `src/` folder) and initialize the submodules
 
 ```
 git clone https://github.com/KTHFSDV/as1819.git --recursive --branch devel
 git submodule update --init --recursive
 ```
 
-7. Install all the ROS dependencies with rosdep:
+8. Install all the ROS dependencies with rosdep
 
 ```
-rosdep install --from-paths src --ignore-src -r -y
+rosdep install --from-paths . --ignore-src -r -y
 ```
 
-8. Build the ROS packages
+9. Build the ROS packages
 
-- ```catkin build -DCMAKE_BUILD_TYPE=Release```
+```
+catkin build -DCMAKE_BUILD_TYPE=Release
+```
 
 Additional packages:
 - ```./ZED_SDK_Linux_*.run``` [download](https://download.stereolabs.com/zedsdk/3.1/jp43/jetsons) and run Zed SDK
