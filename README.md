@@ -41,11 +41,11 @@ sudo systemctl restart docker
 4. Clone this repository and initialize the submodules
 
 ```
-git clone https://github.com/KTHFSDV/as1819.git
+git clone https://github.com/KTHFSDV/as1819.git --recursive --branch devel
 git submodule update --init --recursive
 ```
 
-5. Create docker image for this repository
+5. Create docker image for this repository (which will also build the ROS packages in the image)
 
 ```
 make build
@@ -91,53 +91,52 @@ make roslaunch ARGS="vehicle fs_simulation.launch"
 
 ## Deployment - Nvidia Xavier
 
-For deployment, we don't use docker (yet). Therefore, the setup and the workflow is slightly different (although it's based on the Dockerfile used for development). For deployment, we use a Nvidia Xavier with Ubuntu 18.04 and Jetpack 4.4, which is not yet fully compatible with docker.
+For deployment, we don't use docker (yet). Therefore, the setup and the workflow is slightly different (although it's based on the Dockerfile used for development). For deployment, we use a Nvidia Xavier with Ubuntu 18.04 and Jetpack 4.3, which is not yet fully compatible with docker.
 
 ### Setup
 
+1. Install the required libraries, in case they are not there yet
 
+```
+sudo apt-get update && sudo apt-get install -y python-catkin-tools python-scipy python-pip libopencv-dev libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 doxygen libpcl-dev ros-melodic-desktop-full
+```
 
-### Usage
-
-
-
-To avoid most issues installing some libraries with pip (in particular scipy: see [thread](https://stackoverflow.com/questions/26575587/cant-install-scipy-through-pip)), update pip to the latest version:
+2. To avoid most issues installing some libraries with pip (in particular scipy: see [thread](https://stackoverflow.com/questions/26575587/cant-install-scipy-through-pip)), update pip to the latest version
 
 ```
 pip install --upgrade pip
 ```
 
-- For Ubuntu 18.04:
-  - ```sudo apt update```
-  - ```sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-plugins ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 ros-melodic-joint-state-publisher ros-melodic-robot-state-publisher ros-melodic-robot-localization ros-melodic-rqt ros-melodic-rqt-graph ros-melodic-roslint ros-melodic-urdfdom-py ros-melodic-ros-numpy doxygen```
-  - ```pip install --user python-can cantools rdp osqp pathlib```
+3. Install python-related libraries with pip and upgrade numpy
 
+```
+pip install --user python-can cantools==32.20.1 rdp osqp pathlib && pip install --user --upgrade numpy
+```
 
-- For Ubuntu 16.04:
-  - ```sudo apt update```
-  - ```sudo apt install ros-kinetic-ackermann-msgs ros-kinetic-twist-mux ros-kinetic-joy ros-kinetic-controller-manager ros-kinetic-velodyne-simulator ros-kinetic-effort-controllers ros-kinetic-velocity-controllers ros-kinetic-joint-state-controller ros-kinetic-gazebo-ros-control ros-kinetic-teleop-twist-keyboard ros-kinetic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-dev freeglut3-dev qtbase5-dev ros-kinetic-joint-state-publisher ros-kinetic-robot-state-publisher ros-kinetic-robot-localization ros-kinetic-rqt ros-kinetic-rqt-graph ros-kinetic-roslint ros-kinetic-urdfdom-py ros-kinetic-ros-numpy doxygen```
-  - ```pip install --user python-can==3.0.0 cantools rdp osqp pathlib```
-  - ```pip install --user --upgrade numpy```
+4. Install PyTorch for the Nvidia Xavier. Instructions are taken from [here](https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-5-0-now-available/72048). The following instructions assume Pytorch 1.4.0, Cuda 10.0, JetPack 4.3 and Python 2.7 (use the link if other setups are used):
 
-#### Pytorch ####
-
-- For the Nvidia Xavier, instructions are taken from [here](https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-5-0-now-available/72048). The following instructions assume Pytorch 1.4.0, Cuda 10.0, JetPack 4.3 and Python 2.7 (use the link if other setups are used):
   - ```wget https://nvidia.box.com/shared/static/1v2cc4ro6zvsbu0p8h6qcuaqco1qcsif.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl```
   - ```sudo apt-get install libopenblas-base libopenmpi-dev ```
   - ```pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl```
 
-- If on a laptop without Cuda:
-  - ```pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html```
-  - ```catkin config --blacklist zed_wrapper```
+5. Add `export OPEN_BLAS_NUM_THREADS=1` to the .bashrc file to prevent bugs with multithreading with numpy.
 
-#### Cloning and building this repository ####
+6. Clone this repository and initialize the submodules
 
-- (Xavier only) In the .bashrc file, add: `export OPEN_BLAS_NUM_THREADS=1`. This prevents weird bugs with multithreading with Numpy.
+```
+git clone https://github.com/KTHFSDV/as1819.git --recursive --branch devel
+git submodule update --init --recursive
+```
 
+7. Install all the ROS dependencies with rosdep:
 
-- ```git clone https://github.com/KTHFSDV/as1819.git --recursive --branch devel```
+```
+rosdep install --from-paths src --ignore-src -r -y
+```
+
+8. Build the ROS packages
+
 - ```catkin build -DCMAKE_BUILD_TYPE=Release```
-
 
 Additional packages:
 - ```./ZED_SDK_Linux_*.run``` [download](https://download.stereolabs.com/zedsdk/3.1/jp43/jetsons) and run Zed SDK
@@ -151,20 +150,58 @@ Installing OpenCV 3.4.2 (required for calibration):
 - ./buildAndPackageOpenCV.sh
 - ./removeOpenCVSources.sh
 
+### Usage
 
-### Developing with this repository
+The commands are very similar to the docker version, with the exception that ```make``` is not used.
+
+To rebuild ROS packages:
+
+```
+catkin build
+```
+
+To run roscore:
+
+```
+roscore
+```
+
+To run rqt:
+
+```
+rqt
+```
+
+To run rviz:
+
+```
+rviz
+```
+
+To run roslaunch:
+
+```
+roslaunch package launchfile.launch
+```
+
+For example, to run the complete simulation:
+
+```
+roslaunch vehicle fs_simulation.launch
+```
+
+To run the main launchfile for the car:
+
+```
+roslaunch vehicle run.launch
+```
+
+## Developing with this repository
 When you want to get the latest changes, go at the root of this repository and use:
 ```git pull --recurse-submodules```
 
 
-### Updating this repository
+## Updating this repository
 *This section is mostly relevant for the leads and software architecture members that will update this repository. Otherwise just stick to guideline above on how to use this repository easily setup your ROS workspace.*
 
 `git submodule update --recursive --remote` to update all the submodules to the latest commit of the tracked branch
-
-## How to run (simulation)
-
-- Running the simulation: ```roslaunch vehicle gazebo_simulation.launch```
-- Keyboard control: ```roslaunch robot_control keyboard_robot_control.launch```
-
-## How to run (car)
