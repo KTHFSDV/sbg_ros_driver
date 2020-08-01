@@ -6,11 +6,100 @@ For more information refer to the READMEs of the respective submodules.
 
 ## Overview
 
-
-## Setup and usage of this repository
 This repository mostly includes folders and [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Submodules are basically linked repositories inside a repository. This repository will always link to a certain state of all the submodules it refers to. Normally this should be the most-up-to-date master commit of the submodule, but when a repository updates a master this one will not automatically update with it. For now, this will manually be fixed as fast as possible (at least once a week). This slows down the development a bit, but on the other hand creates an extra opportunity to test the integration of new components into the whole system, whenever this repository updates all its submodules.
 
-### Setup and usage of this repository
+## Development
+
+For development, we use docker. If you are new to this tool, please check the [basic tutorials](https://docs.docker.com/get-started/).
+
+### Setup
+
+1. Install docker
+
+https://docs.docker.com/engine/install/ubuntu/
+https://docs.docker.com/engine/install/linux-postinstall/
+
+2. Verify docker version (need at least 19.03)
+
+```
+docker version
+```
+
+3. If you have a Nvidia GPU (otherwise, skip this step), install the `nvidia-container-toolkit` ([source](https://github.com/NVIDIA/nvidia-docker#ubuntu-160418042004-debian-jessiestretchbuster
+))
+
+```
+# Add the package repositories
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+```
+
+4. Clone this repository and initialize the submodules
+
+```
+git clone https://github.com/KTHFSDV/as1819.git
+git submodule update --init --recursive
+```
+
+5. Create docker image for this repository
+
+```
+make build
+```
+
+### Usage
+
+During development, there is always a need to run `catkin build` to rebuild certain ROS packages. This command is already included when you run:
+
+```
+make build
+```
+
+To run roscore:
+
+```
+make run roscore
+```
+
+To run rqt:
+
+```
+make run rqt
+```
+
+To run rviz:
+
+```
+make run rviz
+```
+
+To run roslaunch:
+
+```
+make run roslaunch ARGS="package launchfile.launch"
+```
+
+For example, to run the complete simulation:
+
+```
+make roslaunch ARGS="vehicle fs_simulation.launch"
+```
+
+## Deployment - Nvidia Xavier
+
+For deployment, we don't use docker (yet). Therefore, the setup and the workflow is slightly different (although it's based on the Dockerfile used for development). For deployment, we use a Nvidia Xavier with Ubuntu 18.04 and Jetpack 4.4, which is not yet fully compatible with docker.
+
+### Setup
+
+
+
+### Usage
+
+
 
 To avoid most issues installing some libraries with pip (in particular scipy: see [thread](https://stackoverflow.com/questions/26575587/cant-install-scipy-through-pip)), update pip to the latest version:
 
