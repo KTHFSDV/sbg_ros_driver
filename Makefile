@@ -41,3 +41,20 @@ rqt:
 		--volume="$(PWD):/home/fs_workspace/src" \
 		as2021 bash -c \
 		"source /home/fs_workspace/devel/setup.bash && rqt"
+
+rviz:
+	docker run -it \
+		--gpus all \
+		--name=as2021-rviz \
+    	--env="DISPLAY" \
+		--env="QT_X11_NO_MITSHM=1" \
+		--env="LIBGL_ALWAYS_INDIRECT=0" \
+    	--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+		--volume="$(XAUTHORITY):/root/.Xauthority" \
+		--ipc=host \
+		--rm \
+		--privileged \
+		--net=host \
+		--volume="$(PWD):/home/fs_workspace/src" \
+		as2021 bash -c \
+		"source /home/fs_workspace/devel/setup.bash && rviz"
