@@ -1,6 +1,6 @@
 .PHONY: build, roscore, roslaunch, rqt, rviz
 
-USE_GPUS_FLAG := $(shell command -v grep 2> /dev/null)
+USE_GPUS_FLAG := $(shell command -v nvidia-container-toolkit 2> /dev/null)
 
 DISPLAY_CONFIG = \
 	--env="DISPLAY" \
@@ -16,7 +16,7 @@ build:
 	docker build -t as2021 -f docker/Dockerfile .
 
 roscore:
-	docker run -it --name=as2021 --rm as2021 bash -c "roscore"
+	docker run -it --rm --net=host --name=as2021 as2021 bash -c "roscore"
 
 roslaunch:
 	docker run -it --rm \
