@@ -1,11 +1,16 @@
 .PHONY: build, roscore, roslaunch, rqt, rviz
 
+USE_GPUS_FLAG := $(shell command -v grep 2> /dev/null)
+
 DISPLAY_CONFIG = \
 	--env="DISPLAY" \
 	--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 	--volume="$(XAUTHORITY):/root/.Xauthority" \
-	--privileged \
-	--gpus=all
+	--privileged
+
+ifdef USE_GPUS_FLAG
+	DISPLAY_CONFIG += --gpus=all
+endif
 
 build:
 	docker build -t as2021 -f docker/Dockerfile .
