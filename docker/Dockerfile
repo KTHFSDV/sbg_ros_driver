@@ -2,7 +2,7 @@ FROM ros:melodic as base
 
 RUN apt-get update && apt-get install -y python-catkin-tools python-scipy python-pip \
     libopencv-dev libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 doxygen \
-    libpcl-dev ros-melodic-desktop-full
+    libpcl-dev ros-melodic-rviz
 
 RUN pip install --upgrade pip
 
