@@ -16,12 +16,12 @@ build:
 	docker build -t as2021 -f docker/Dockerfile .
 
 roscore:
-	docker run -it --rm --net=host --name=as2021 as2021 bash -c "roscore"
+	docker run -it --rm --net=host --name=roscore as2021 bash -c "roscore"
 
 roslaunch:
 	docker run -it --rm \
 		--net=host \
-		--name=as2021 \
+		--name=roslaunch \
 		$(DISPLAY_CONFIG) \
 		--volume="$(PWD):/home/fs_workspace/src" \
 		as2021 bash -c \
@@ -30,7 +30,7 @@ roslaunch:
 rqt:
 	docker run -it --rm \
         --net=host \
-		--name=as2021-rqt \
+		--name=rqt \
 		$(DISPLAY_CONFIG) \
 		--volume="$(PWD):/home/fs_workspace/src" \
 		as2021 bash -c \
@@ -39,7 +39,7 @@ rqt:
 rviz:
 	docker run -it --rm \
         --net=host \
-		--name=as2021-rviz \
+		--name=rviz \
 		$(DISPLAY_CONFIG) \
 		--volume="$(PWD):/home/fs_workspace/src" \
 		as2021 bash -c \
