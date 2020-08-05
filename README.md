@@ -62,25 +62,25 @@ make build
 To run roscore:
 
 ```
-make run roscore
+make roscore
 ```
 
 To run rqt:
 
 ```
-make run rqt
+make rqt
 ```
 
 To run rviz:
 
 ```
-make run rviz
+make rviz
 ```
 
 To run roslaunch:
 
 ```
-make run roslaunch ARGS="package launchfile.launch"
+make roslaunch ARGS="package launchfile.launch"
 ```
 
 For example, to run the complete simulation:
