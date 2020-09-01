@@ -11,7 +11,7 @@
 	url = https://github.com/KTHFSDV/simulation.git
 	branch = devel
 [submodule "gnss_utils"]
-	path = gnss_utils
+	path = sensors/gnss_utils
 	url = https://github.com/KTHFSDV/gnss_utils.git
 	branch = devel
 [submodule "communication"]
