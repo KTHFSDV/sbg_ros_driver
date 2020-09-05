@@ -25,7 +25,7 @@ https://docs.docker.com/engine/install/linux-postinstall/
 docker version
 ```
 
-3. If you have a Nvidia GPU (otherwise, skip this step), install the `nvidia-container-toolkit` ([source](https://github.com/NVIDIA/nvidia-docker#ubuntu-160418042004-debian-jessiestretchbuster
+3. If you have a Nvidia GPU (**otherwise, skip this step**), install the `nvidia-container-toolkit` ([source](https://github.com/NVIDIA/nvidia-docker#ubuntu-160418042004-debian-jessiestretchbuster
 ))
 
 ```
@@ -41,7 +41,7 @@ sudo systemctl restart docker
 4. Clone this repository and initialize the submodules
 
 ```
-git clone https://github.com/KTHFSDV/as1819.git --recursive --branch devel
+git clone https://github.com/KTHFSDV/as1819.git --recursive --branch docker
 git submodule update --init --recursive
 ```
 
