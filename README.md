@@ -21,16 +21,28 @@ pip install --upgrade pip
 - For Ubuntu 18.04:
   - ```sudo apt update```
   - ```sudo apt install ros-melodic-ackermann-msgs ros-melodic-twist-mux ros-melodic-joy ros-melodic-controller-manager ros-melodic-velodyne-simulator ros-melodic-effort-controllers ros-melodic-velocity-controllers ros-melodic-joint-state-controller ros-melodic-gazebo-plugins ros-melodic-gazebo-ros-control ros-melodic-teleop-twist-keyboard ros-melodic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 ros-melodic-joint-state-publisher ros-melodic-robot-state-publisher ros-melodic-robot-localization ros-melodic-rqt ros-melodic-rqt-graph ros-melodic-roslint ros-melodic-urdfdom-py ros-melodic-ros-numpy doxygen```
-  - ```pip install --user python-can cantools rdp osqp pathlib```
+  - ```pip install --user python-can cantools==32.20.1 rdp osqp pathlib```
+  - ```pip install --user --upgrade numpy```
 
 
 - For Ubuntu 16.04:
   - ```sudo apt update```
   - ```sudo apt install ros-kinetic-ackermann-msgs ros-kinetic-twist-mux ros-kinetic-joy ros-kinetic-controller-manager ros-kinetic-velodyne-simulator ros-kinetic-effort-controllers ros-kinetic-velocity-controllers ros-kinetic-joint-state-controller ros-kinetic-gazebo-ros-control ros-kinetic-teleop-twist-keyboard ros-kinetic-hector-gazebo-plugins python-scipy python-pip libopencv-dev libqglviewer-dev freeglut3-dev qtbase5-dev ros-kinetic-joint-state-publisher ros-kinetic-robot-state-publisher ros-kinetic-robot-localization ros-kinetic-rqt ros-kinetic-rqt-graph ros-kinetic-roslint ros-kinetic-urdfdom-py ros-kinetic-ros-numpy doxygen```
-  - ```pip install --user python-can==3.0.0 cantools rdp osqp pathlib```
+  - ```pip install --user python-can==3.0.0 cantools==32.20.1 rdp osqp pathlib```
   - ```pip install --user --upgrade numpy```
+  
+  #### Cloning and building this repository ####
 
-#### Pytorch ####
+- (Xavier only) In the .bashrc file, add: `export OPEN_BLAS_NUM_THREADS=1`. This prevents weird bugs with multithreading with Numpy.
+
+- Create a catkin workspace
+- Clone the repository into the `src` folder: ```git clone https://github.com/KTHFSDV/ARCS.git --recursive --branch devel```
+- ```catkin config --blacklist zed_wrapper zed_nodelets gtsam```
+- ```catkin build -DCMAKE_BUILD_TYPE=Release```
+- Source ```source devel/setup.bash```
+
+
+#### Pytorch (only for perception) ####
 
 - For the Nvidia Xavier, instructions are taken from [here](https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-5-0-now-available/72048). The following instructions assume Pytorch 1.4.0, Cuda 10.0, JetPack 4.3 and Python 2.7 (use the link if other setups are used):
   - ```wget https://nvidia.box.com/shared/static/1v2cc4ro6zvsbu0p8h6qcuaqco1qcsif.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl```
@@ -39,16 +51,6 @@ pip install --upgrade pip
 
 - If on a laptop without Cuda:
   - ```pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html```
-  - ```catkin config --blacklist zed_wrapper```
-
-#### Cloning and building this repository ####
-
-- (Xavier only) In the .bashrc file, add: `export OPEN_BLAS_NUM_THREADS=1`. This prevents weird bugs with multithreading with Numpy.
-
-
-- ```git clone https://github.com/KTHFSDV/as1819.git --recursive --branch devel```
-- ```catkin build -DCMAKE_BUILD_TYPE=Release```
-
 
 Additional packages:
 - ```./ZED_SDK_Linux_*.run``` [download](https://download.stereolabs.com/zedsdk/3.1/jp43/jetsons) and run Zed SDK
@@ -75,7 +77,7 @@ When you want to get the latest changes, go at the root of this repository and u
 
 ## How to run (simulation)
 
-- Running the simulation: ```roslaunch vehicle gazebo_simulation.launch```
-- Keyboard control: ```roslaunch robot_control keyboard_robot_control.launch```
+- Running the simulation: ```roslaunch vehicle fs_simulation.launch```
 
 ## How to run (car)
+- Running the pipeline: ```roslaunch vehicle run.launch```
