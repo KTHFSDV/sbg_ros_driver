@@ -36,7 +36,7 @@ pip install --upgrade pip
 - (Xavier only) In the .bashrc file, add: `export OPEN_BLAS_NUM_THREADS=1`. This prevents weird bugs with multithreading with Numpy.
 
 - Create a catkin workspace
-- Clone the repository into the `src` folder: ```git clone https://github.com/KTHFSDV/as1819.git --recursive --branch devel```
+- Clone the repository into the `src` folder: ```git clone https://github.com/KTHFSDV/ARCS.git --recursive --branch devel```
 - ```catkin config --blacklist zed_wrapper zed_nodelets gtsam```
 - ```catkin build -DCMAKE_BUILD_TYPE=Release```
 - Source ```source devel/setup.bash```
