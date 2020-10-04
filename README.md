@@ -31,12 +31,21 @@ pip install --upgrade pip
   - ```pip install --user python-can==3.0.0 cantools==32.20.1 rdp osqp pathlib```
   - ```pip install --user --upgrade numpy```
   
+  #### SSH setup ####
+  *If you already have an SSH key setup with your Github account, skip this part.*
+  
+  Prior to cloning the repository, you need to setup an SSH key and add it to your github account.
+  
+  - [Generate an ssh-key](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)
+  - [Add the ssh key to your Github account](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
+  
   #### Cloning and building this repository ####
+  
 
 - (Xavier only) In the .bashrc file, add: `export OPEN_BLAS_NUM_THREADS=1`. This prevents weird bugs with multithreading with Numpy.
 
 - Create a catkin workspace
-- Clone the repository into the `src` folder: ```git clone https://github.com/KTHFSDV/ARCS.git --recursive --branch devel```
+- Clone the repository into the `src` folder: ```git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch devel```
 - ```catkin config --blacklist zed_wrapper zed_nodelets gtsam```
 - ```catkin build -DCMAKE_BUILD_TYPE=Release```
 - Source ```source devel/setup.bash```
