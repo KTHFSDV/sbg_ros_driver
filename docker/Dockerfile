@@ -7,13 +7,14 @@ RUN apt-get update && apt-get install -y python-catkin-tools python-scipy python
 RUN pip install --upgrade pip
 
 # cantools dropped support for Python2 in its latest release
-RUN pip install --user python-can cantools==32.20.1 rdp osqp pathlib
+RUN pip install --user python-can cantools==32.20.1 rdp osqp pathlib pyyaml
 
 RUN pip install --user --upgrade numpy
 
 SHELL ["/bin/bash", "-c"]
 
 ENV ROS_WORKSPACE=/home/fs_workspace/
+ENV BLACKLISTED_PACKAGES="gtsam zed_nodelets zed_wrapper"
 
 
 FROM base as fs_msgs
@@ -30,10 +31,11 @@ RUN rosdep install --from-paths src --ignore-src -r -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
-FROM base as gnss_utils
+FROM base as sensors
 WORKDIR $ROS_WORKSPACE
-COPY ./gnss_utils src/gnss_utils/
+COPY ./sensors src/sensors/
 RUN rosdep install --from-paths src --ignore-src -r -y
+RUN catkin config --blacklist $BLACKLISTED_PACKAGES
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
@@ -56,7 +58,6 @@ WORKDIR $ROS_WORKSPACE
 COPY ./fs_msgs src/fs_msgs/
 COPY ./perception src/perception/
 RUN rosdep install --from-paths src --ignore-src -r -y
-RUN catkin config --blacklist zed_wrapper
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
@@ -65,6 +66,7 @@ WORKDIR $ROS_WORKSPACE
 COPY ./fs_msgs src/fs_msgs/
 COPY ./slam src/slam/
 RUN rosdep install --from-paths src --ignore-src -r -y
+RUN catkin config --blacklist $BLACKLISTED_PACKAGES
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 
@@ -81,7 +83,7 @@ ENV ROS_PACKAGES_FOLDER=/opt/ros/melodic/
 
 COPY --from=fs_msgs $ROS_PACKAGES_FOLDER $ROS_PACKAGES_FOLDER
 COPY --from=fs_simulation $ROS_PACKAGES_FOLDER $ROS_PACKAGES_FOLDER
-COPY --from=gnss_utils $ROS_PACKAGES_FOLDER $ROS_PACKAGES_FOLDER
+COPY --from=sensors $ROS_PACKAGES_FOLDER $ROS_PACKAGES_FOLDER
 COPY --from=controller $ROS_PACKAGES_FOLDER $ROS_PACKAGES_FOLDER
 COPY --from=path_planner $ROS_PACKAGES_FOLDER $ROS_PACKAGES_FOLDER
 COPY --from=perception $ROS_PACKAGES_FOLDER $ROS_PACKAGES_FOLDER
@@ -92,7 +94,7 @@ WORKDIR $ROS_WORKSPACE
 
 COPY --from=fs_msgs $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=fs_simulation $ROS_WORKSPACE $ROS_WORKSPACE
-COPY --from=gnss_utils $ROS_WORKSPACE $ROS_WORKSPACE
+COPY --from=sensors $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=controller $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=path_planner $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=perception $ROS_WORKSPACE $ROS_WORKSPACE
