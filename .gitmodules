@@ -1,34 +1,34 @@
 [submodule "slam"]
 	path = slam
-	url = https://github.com/KTHFSDV/slam.git
+	url = git@github.com:KTHFSDV/slam.git
 	branch = devel
 [submodule "fs_msgs"]
 	path = fs_msgs
-	url = https://github.com/KTHFSDV/fs_msgs.git
+	url = git@github.com:KTHFSDV/fs_msgs.git
 	branch = devel
 [submodule "simulation"]
 	path = simulation
-	url = https://github.com/KTHFSDV/simulation.git
+	url = git@github.com:KTHFSDV/simulation.git
 	branch = devel
 [submodule "gnss_utils"]
-	path = gnss_utils
-	url = https://github.com/KTHFSDV/gnss_utils.git
+	path = sensors/gnss_utils
+	url = git@github.com:KTHFSDV/gnss_utils.git
 	branch = devel
 [submodule "communication"]
 	path = communication
-	url = https://github.com/KTHFSDV/communication.git
+	url = git@github.com:KTHFSDV/communication.git
 	branch = devel
 [submodule "vehicle"]
 	path = vehicle
-	url = https://github.com/KTHFSDV/vehicle.git
+	url = git@github.com:KTHFSDV/vehicle.git
 	branch = devel
 [submodule "sensors/zed-ros-wrapper"]
 	path = sensors/zed-ros-wrapper
-	url = https://github.com/stereolabs/zed-ros-wrapper.git
+	url = git@github.com:stereolabs/zed-ros-wrapper.git
 	branch = master
 [submodule "navigation"]
 	path = navigation
-	url = https://github.com/KTHFSDV/navigation.git
+	url = git@github.com:KTHFSDV/navigation.git
 [submodule "perception"]
 	path = perception
-	url = https://github.com/KTHFSDV/perception.git
+	url = git@github.com:KTHFSDV/perception.git
