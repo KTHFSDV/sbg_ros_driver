@@ -1,7 +1,7 @@
 FROM ros:melodic as base
 
 RUN apt-get update && apt-get install -y python-catkin-tools python-scipy python-pip \
-    libopencv-dev libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 doxygen \
+    libopencv-dev=3.2.0+dfsg-4ubuntu0.1 libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 doxygen \
     libpcl-dev ros-melodic-rviz
 
 RUN pip install --upgrade pip
@@ -101,6 +101,7 @@ COPY --from=perception $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=slam $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=vehicle $ROS_WORKSPACE $ROS_WORKSPACE
 
+RUN apt-get update && apt-get upgrade -y
 RUN source /opt/ros/melodic/setup.bash && catkin build
 
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
