@@ -13,7 +13,7 @@ ifdef USE_GPUS_FLAG
 endif
 
 build:
-	docker build -t as2021 -f docker/Dockerfile .
+	docker build -t as2021:vnc -f docker/Dockerfile .
 
 roscore:
 	docker run -it --rm --net=host --name=roscore as2021 bash -c "roscore"
