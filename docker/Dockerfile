@@ -1,8 +1,16 @@
 FROM ros:melodic as base
 
-RUN apt-get update && apt-get install -y python-catkin-tools python-scipy python-pip \
-    libopencv-dev=3.2.0+dfsg-4ubuntu0.1 libqglviewer-headers freeglut3-dev qtbase5-dev libqglviewer-dev-qt5 doxygen \
-    libpcl-dev ros-melodic-rviz
+RUN apt-get update && apt-get install -y \
+    doxygen \
+    freeglut3-dev \
+    libopencv-dev=3.2.0+dfsg-4ubuntu0.1 \
+    libpcl-dev \
+    libqglviewer-dev-qt5 \
+    libqglviewer-headers \
+    python-catkin-tools \
+    python-scipy python-pip \
+    qtbase5-dev \
+    ros-melodic-rviz
 
 RUN pip install --upgrade pip
 
@@ -12,6 +20,26 @@ RUN pip install --user python-can cantools==32.20.1 rdp osqp pathlib pyyaml
 RUN pip install --user --upgrade numpy
 
 SHELL ["/bin/bash", "-c"]
+
+########## VNC Setup #############
+ENV DISPLAY=:1 \
+    VNC_PORT=5901 \
+    NO_VNC_PORT=6901 \
+    VNC_RESOLUTION=1920x1080 \
+    STARTUPDIR=/startup \
+    SCRIPTSDIR=/install \
+    NO_VNC_HOME=/root/.no_vnc
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    tigervnc-common \
+    tigervnc-standalone-server \
+    xfce4 \
+    xfce4-goodies \
+    wget
+EXPOSE $VNC_PORT $NO_VNC_PORT
+ADD ./docker/no_vnc.sh $SCRIPTSDIR/
+RUN $SCRIPTSDIR/no_vnc.sh
+###################################
 
 ENV ROS_WORKSPACE=/home/fs_workspace/
 ENV BLACKLISTED_PACKAGES="gtsam zed_nodelets zed_wrapper"
@@ -101,9 +129,19 @@ COPY --from=perception $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=slam $ROS_WORKSPACE $ROS_WORKSPACE
 COPY --from=vehicle $ROS_WORKSPACE $ROS_WORKSPACE
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
 RUN source /opt/ros/melodic/setup.bash && catkin build
+
 
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 ENV ROS_HOSTNAME=localhost
+
+# Run VNC && noVNC
+# Auto set defaults for xfce panels
+RUN mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml \
+ && cp /etc/xdg/xfce4/panel/default.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+
+ADD ./docker/startup.sh $STARTUPDIR/
+ADD ./docker/custom_vnc_lite.html $NO_VNC_HOME/vnc_lite.html
+ENTRYPOINT ["/startup/startup.sh"]

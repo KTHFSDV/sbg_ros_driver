@@ -18,29 +18,33 @@ build:
 roscore:
 	docker run -it --rm --net=host --name=roscore as2021 bash -c "roscore"
 
+bash:
+	docker run -it --rm \
+		-p 5901:5901 -p 6901:6901 \
+		--name=roslaunch \
+		--volume="${CURDIR}:/home/fs_workspace/src" \
+		kthfsdv/as2021:vnc bash
+
 roslaunch:
 	docker run -it --rm \
-		--net=host \
+		-p 5901:5901 -p 6901:6901 \
 		--name=roslaunch \
-		$(DISPLAY_CONFIG) \
-		--volume="$(PWD):/home/fs_workspace/src" \
+		--volume="${CURDIR}:/home/fs_workspace/src" \
 		as2021 bash -c \
 		"source /home/fs_workspace/devel/setup.bash && roslaunch $(ARGS)"
 
 rqt:
 	docker run -it --rm \
-        --net=host \
+		-p 5901:5901 -p 6901:6901 \
 		--name=rqt \
-		$(DISPLAY_CONFIG) \
-		--volume="$(PWD):/home/fs_workspace/src" \
+		--volume="${CURDIR}:/home/fs_workspace/src" \
 		as2021 bash -c \
 		"source /home/fs_workspace/devel/setup.bash && rqt"
 
 rviz:
 	docker run -it --rm \
-        --net=host \
+		-p 5901:5901 -p 6901:6901 \
 		--name=rviz \
-		$(DISPLAY_CONFIG) \
-		--volume="$(PWD):/home/fs_workspace/src" \
+		--volume="${CURDIR}:/home/fs_workspace/src" \
 		as2021 bash -c \
 		"source /home/fs_workspace/devel/setup.bash && rviz"
