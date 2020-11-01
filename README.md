@@ -1,6 +1,6 @@
 # Autonomous System 2018/2019 (as1819)
 
-This repository will bundle all required repositories to run simulations and run the actual system on the car. The goal of this is to facilitate and streamline the setup process and to make it easier for new members to start developing. For this reason this repository will also include some high level guides on how to setup the system, run it, and will also give a high level overview of all the components.
+This repository will bundle all required repositories to run simulations and run the actual system on the car, edited to work for Windows and Mac. Instead of running rviz natively, this solution uses VNC to run it. The goal of this is to facilitate and streamline the setup process and to make it easier for new members to start developing. For this reason this repository will also include some high level guides on how to setup the system, run it, and will also give a high level overview of all the components.
 
 For more information refer to the READMEs of the respective submodules.
 
@@ -59,6 +59,11 @@ During development, there is always a need to run `catkin build` to rebuild cert
 make build
 ```
 
+Make bash:
+```
+make bash
+```
+
 To run roscore:
 
 ```
@@ -88,6 +93,9 @@ For example, to run the complete simulation:
 ```
 make roslaunch ARGS="vehicle fs_simulation.launch"
 ```
+
+Go to http://localhost:6901/ to view your graphical dekstop, where you will see simulations and applications will appear.
+
 
 ## Deployment - Nvidia Xavier
 
