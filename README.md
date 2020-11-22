@@ -41,7 +41,7 @@ sudo systemctl restart docker
 4. Clone this repository and initialize the submodules
 
 ```
-git clone https://github.com/KTHFSDV/as1819.git --recursive --branch docker
+git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch docker-vnc
 git submodule update --init --recursive
 ```
 
