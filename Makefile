@@ -1,50 +1,43 @@
-.PHONY: build, roscore, roslaunch, rqt, rviz
+.PHONY: bash roscore roslaunch image
 
 USE_GPUS_FLAG := $(shell command -v nvidia-container-toolkit 2> /dev/null)
 
-DISPLAY_CONFIG = \
+FS_VOLUME = kthfsdv
+DOCKER_RUN_OPTIONS = \
+	-it --rm \
+	-p 5901:5901 -p 6901:6901 \
+	--name=as2021 \
+	--volume="${FS_VOLUME}:/home/fs_workspace" \
+	--volume="${CURDIR}:/home/fs_workspace/src"
+DOCKER_IMAGE_NAME = kthfsdv/as2021:latest
+
+UNIX_DISPLAY_CONFIG = \
 	--env="DISPLAY" \
 	--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 	--volume="$(XAUTHORITY):/root/.Xauthority" \
 	--privileged
 
 ifdef USE_GPUS_FLAG
-	DISPLAY_CONFIG += --gpus=all
+	UNIX_DISPLAY_CONFIG += --gpus=all
 endif
 
-build:
-	docker build -t as2021:vnc -f docker/Dockerfile .
-
-roscore:
-	docker run -it --rm --net=host --name=roscore as2021:vnc bash -c "roscore"
-
 bash:
-	docker run -it --rm \
-		-p 5901:5901 -p 6901:6901 \
-		--name=roslaunch \
-		--volume="${CURDIR}:/home/fs_workspace/src" \
-		as2021:vnc bash
+	docker run $(DOCKER_RUN_OPTIONS) \
+			$(if $(X),$(UNIX_DISPLAY_CONFIG)) \
+			$(DOCKER_IMAGE_NAME) bash
 
 roslaunch:
-	docker run -it --rm \
-		-p 5901:5901 -p 6901:6901 \
-		--name=roslaunch \
-		--volume="${CURDIR}:/home/fs_workspace/src" \
-		as2021:vnc bash -c \
-		"source /home/fs_workspace/devel/setup.bash && roslaunch $(ARGS)"
+	docker run $(DOCKER_RUN_OPTIONS) \
+			$(if $(X),$(UNIX_DISPLAY_CONFIG)) \
+			$(DOCKER_IMAGE_NAME) bash -c \
+			"roslaunch $(ARGS)"
 
-rqt:
-	docker run -it --rm \
-		-p 5901:5901 -p 6901:6901 \
-		--name=rqt \
-		--volume="${CURDIR}:/home/fs_workspace/src" \
-		as2021:vnc bash -c \
-		"source /home/fs_workspace/devel/setup.bash && rqt"
+roscore:
+	docker run $(DOCKER_RUN_OPTIONS) \
+			$(if $(X),$(UNIX_DISPLAY_CONFIG)) \
+			$(DOCKER_IMAGE_NAME) bash -c \
+			"roscore"
 
-rviz:
-	docker run -it --rm \
-		-p 5901:5901 -p 6901:6901 \
-		--name=rviz \
-		--volume="${CURDIR}:/home/fs_workspace/src" \
-		as2021:vnc bash -c \
-		"source /home/fs_workspace/devel/setup.bash && rviz"
+# Do not run this, you probably don't need it
+image:
+	docker build -t kthfsdv/as2021:vnc -f docker/Dockerfile .

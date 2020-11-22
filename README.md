@@ -45,41 +45,33 @@ git clone https://github.com/KTHFSDV/as1819.git --recursive --branch docker
 git submodule update --init --recursive
 ```
 
-5. Create docker image for this repository (which will also build the ROS packages in the image)
+5. Pull the docker image (which will also build the ROS packages in the image)
 
 ```
-make build
+docker pull kthfsdv/as2021:latest
 ```
 
 ### Usage
 
-During development, there is always a need to run `catkin build` to rebuild certain ROS packages. This command is already included when you run:
+During development, there is always a need to run `catkin build` to rebuild certain ROS packages.
+This command is automatically run the first time you run a container, but you'll need to run it
+more frequently yourself as you are making changes to your code. 
 
+Start a container using VNC as a graphical environment:
 ```
-make build
+make
 ```
+You are now provided with a bash command prompt to run whatever commands you need. 
 
-Make bash:
-```
-make bash
-```
+Start a container using an X server installed on your host machine:
+````
+make X=1
+````
 
 To run roscore:
 
 ```
 make roscore
-```
-
-To run rqt:
-
-```
-make rqt
-```
-
-To run rviz:
-
-```
-make rviz
 ```
 
 To run roslaunch:
