@@ -25,4 +25,3 @@ jobs:
           file: ./docker/Dockerfile
           cache-from: ${{ secrets.DOCKER_USERNAME }}/arcs:latest
           tags: ${{ secrets.DOCKER_USERNAME }}/arcs:latest
-          pull: true
