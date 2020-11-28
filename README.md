@@ -152,7 +152,7 @@ catkin build -DCMAKE_BUILD_TYPE=Release
 
 Additional packages:
 - ```./ZED_SDK_Linux_*.run``` [download](https://download.stereolabs.com/zedsdk/3.1/jp43/jetsons) and run Zed SDK
-- ```sudo apt install ros-melodic-cv-bridge ros-melodic-image-geometry ``` if purging and installing [opencv 3.4.2 for xavier](https://www.jetsonhacks.com/2018/11/08/build-opencv-3-4-on-nvidia-jetson-agx-xavier-developer-kit/) for calibration or zed
+- ```sudo apt install ros-melodic-cv-bridge ros-melodic-image-geometry libturbojpeg``` if purging and installing [opencv 3.4.2 for xavier](https://www.jetsonhacks.com/2018/11/08/build-opencv-3-4-on-nvidia-jetson-agx-xavier-developer-kit/) for calibration or zed
 
 Installing OpenCV 3.4.2 (required for calibration):
 - cd /tmp/
