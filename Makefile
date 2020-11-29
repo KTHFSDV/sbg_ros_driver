@@ -6,10 +6,10 @@ FS_VOLUME = kthfsdv
 DOCKER_RUN_OPTIONS = \
 	-it --rm \
 	-p 5901:5901 -p 6901:6901 \
-	--name=as2021 \
+	--name=arcs \
 	--volume="${FS_VOLUME}:/home/fs_workspace" \
 	--volume="${CURDIR}:/home/fs_workspace/src"
-DOCKER_IMAGE_NAME = kthfsdv/as2021:latest
+DOCKER_IMAGE_NAME = kthfsdv/arcs:latest
 
 UNIX_DISPLAY_CONFIG = \
 	--env="DISPLAY" \
@@ -40,4 +40,4 @@ roscore:
 
 # Do not run this, you probably don't need it
 image:
-	docker build -t kthfsdv/as2021:vnc -f docker/Dockerfile .
+	docker build -t kthfsdv/arcs:latest -f docker/Dockerfile .

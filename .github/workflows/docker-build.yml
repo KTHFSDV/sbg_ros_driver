@@ -30,5 +30,15 @@ jobs:
           cache-from: ${{ secrets.DOCKER_USERNAME }}/arcs:latest
           tags: ${{ secrets.DOCKER_USERNAME }}/arcs:latest
 
-      - name: Check images
-        run: docker images
+  catkin_build:
+    name: Build the Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          token: ${{ secrets.PAT }}
+
+      - name: Run 'catkin build'
+        run: make bash
