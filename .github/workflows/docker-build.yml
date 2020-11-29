@@ -1,4 +1,4 @@
-name: Docker
+name: ARCS
 
 on:
   pull_request:
@@ -31,8 +31,9 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/arcs:latest
 
   catkin_build:
-    name: Build the Project
+    name: Build ARCS Project
     runs-on: ubuntu-latest
+    needs: build_image
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
