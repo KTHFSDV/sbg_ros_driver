@@ -4,7 +4,6 @@ USE_GPUS_FLAG := $(shell command -v nvidia-container-toolkit 2> /dev/null)
 
 FS_VOLUME = kthfsdv
 DOCKER_RUN_OPTIONS = \
-	-it --rm \
 	-p 5901:5901 -p 6901:6901 \
 	--name=arcs \
 	--volume="${FS_VOLUME}:/home/fs_workspace" \
@@ -22,21 +21,25 @@ ifdef USE_GPUS_FLAG
 endif
 
 bash:
-	docker run $(DOCKER_RUN_OPTIONS) \
+	docker run -it --rm $(DOCKER_RUN_OPTIONS) \
 			$(if $(X),$(UNIX_DISPLAY_CONFIG)) \
 			$(DOCKER_IMAGE_NAME) bash
 
 roslaunch:
-	docker run $(DOCKER_RUN_OPTIONS) \
+	docker run -it --rm $(DOCKER_RUN_OPTIONS) \
 			$(if $(X),$(UNIX_DISPLAY_CONFIG)) \
 			$(DOCKER_IMAGE_NAME) bash -c \
 			"roslaunch $(ARGS)"
 
 roscore:
-	docker run $(DOCKER_RUN_OPTIONS) \
+	docker run -it --rm $(DOCKER_RUN_OPTIONS) \
 			$(if $(X),$(UNIX_DISPLAY_CONFIG)) \
 			$(DOCKER_IMAGE_NAME) bash -c \
 			"roscore"
+
+test:
+	docker run --rm $(DOCKER_RUN_OPTIONS) \
+			$(DOCKER_IMAGE_NAME) bash
 
 # Do not run this, you probably don't need it
 image:
