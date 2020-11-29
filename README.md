@@ -41,14 +41,14 @@ sudo systemctl restart docker
 4. Clone this repository and initialize the submodules
 
 ```
-git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch docker-vnc
+git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch docker
 git submodule update --init --recursive
 ```
 
 5. Pull the docker image (which will also build the ROS packages in the image)
 
 ```
-docker pull kthfsdv/as2021:latest
+docker pull kthfsdv/arcs:latest
 ```
 
 ### Usage
@@ -57,13 +57,13 @@ During development, there is always a need to run `catkin build` to rebuild cert
 This command is automatically run the first time you run a container, but you'll need to run it
 more frequently yourself as you are making changes to your code. 
 
-Start a container using VNC as a graphical environment:
+Start a container using VNC as a graphical environment (recommended if your host OS is not Ubuntu):
 ```
 make
 ```
 You are now provided with a bash command prompt to run whatever commands you need. 
 
-Start a container using an X server installed on your host machine:
+You can also start a container using an X server installed on your host machine (Recommended if your host OS is Ubuntu):
 ````
 make X=1
 ````
