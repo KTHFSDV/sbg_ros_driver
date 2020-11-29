@@ -21,6 +21,7 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.PAT }}
+          # TODO: Replace with docker after docker-vnc is merged
           ref: docker-vnc
 
       - name: Set up Docker Buildx
@@ -50,6 +51,8 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.PAT }}
+          # TODO: Replace with docker after docker-vnc is merged
+          ref: docker-vnc
 
       - name: Run 'catkin build'
         run: make test
