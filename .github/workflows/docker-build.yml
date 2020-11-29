@@ -41,4 +41,4 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Run 'catkin build'
-        run: make bash
+        run: make test
