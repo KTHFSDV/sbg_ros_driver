@@ -12,6 +12,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     python-catkin-tools \
     python-scipy python-pip \
     qtbase5-dev \
+    vim \
     ros-melodic-rviz
 
 RUN pip install --upgrade pip

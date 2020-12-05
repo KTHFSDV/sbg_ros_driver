@@ -5,7 +5,7 @@ set -e
 
 echo "Welcome !"
 
-if [ "$DISPLAY" = ":1" ]
+if [[ -z "${IS_X11_USED}" ]]
 then
   printf "Setting up VNC ... "
 
@@ -32,7 +32,7 @@ if [ ! -d "build" ]; then
   source /opt/ros/melodic/setup.bash
   catkin build || printf "\nThe build has failed !!!\n\n"
 fi
-source devel/setup.bash
+source devel/setup.bash || printf "\ndevel/setup.bash is missing ! \n\n"
 
 printf "Your workspace is now ready.\n\n"
 

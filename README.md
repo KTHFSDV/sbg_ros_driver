@@ -62,6 +62,7 @@ Start a container using VNC as a graphical environment (recommended if your host
 make
 ```
 You are now provided with a bash command prompt to run whatever commands you need. 
+If you want another bash terminal (in the container), just rerun ``make`` again.  
 
 You can also start a container using an X server installed on your host machine (Recommended if your host OS is Ubuntu):
 ````
@@ -71,22 +72,25 @@ make X=1
 To run roscore:
 
 ```
-make roscore
+make
+root@5b9f03a3e9de:/home/fs_workspace# roscore
 ```
 
 To run roslaunch:
 
 ```
-make roslaunch ARGS="package launchfile.launch"
+make
+root@5b9f03a3e9de:/home/fs_workspace# roslaunch package launchfile.launch
 ```
 
 For example, to run the complete simulation:
 
 ```
-make roslaunch ARGS="vehicle fs_simulation.launch"
+make
+root@5b9f03a3e9de:/home/fs_workspace# roslaunch vehicle fs_simulation.launch
 ```
 
-Go to http://localhost:6901/ to view your graphical dekstop, where you will see simulations and applications will appear.
+If you use VNC, go to http://localhost:6901/ to use your graphical dekstop (where you can rviz for example).
 
 
 ## Deployment - Nvidia Xavier
