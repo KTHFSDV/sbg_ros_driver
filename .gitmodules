@@ -29,6 +29,8 @@
 [submodule "navigation"]
 	path = navigation
 	url = git@github.com:KTHFSDV/navigation.git
+	branch = devel
 [submodule "perception"]
 	path = perception
 	url = git@github.com:KTHFSDV/perception.git
+	branch = devel
