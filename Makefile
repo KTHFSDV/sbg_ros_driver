@@ -19,7 +19,7 @@ UNIX_DISPLAY_CONFIG = \
 
 ifdef X
 	USE_GPUS_FLAG := $(shell command -v nvidia-container-toolkit 2> /dev/null)
-	ifdef UNIX_DISPLAY_CONFIG
+	ifdef USE_GPUS_FLAG
 		UNIX_DISPLAY_CONFIG += --gpus=all
 	endif
 endif
