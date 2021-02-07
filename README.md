@@ -41,8 +41,7 @@ sudo systemctl restart docker
 4. Clone this repository and initialize the submodules
 
 ```
-git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch docker
-git submodule update --init --recursive
+git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch devel
 ```
 
 5. Pull the docker image (which will also build the ROS packages in the image)
