@@ -31,10 +31,9 @@ if [ ! -d "build" ]; then
   set +e
 
   echo "Running catkin build ..."
+  source /opt/ros/melodic/setup.bash
   catkin build || printf "\nThe build has failed !!!\n\n"
 fi
-source /opt/ros/melodic/setup.bash
-source devel/setup.bash || printf "\ndevel/setup.bash is missing ! \n\n"
 
 printf "Your workspace is now ready.\n\n"
 
