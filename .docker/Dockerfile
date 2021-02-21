@@ -47,7 +47,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     wget
 EXPOSE $VNC_PORT $NO_VNC_PORT
 ADD .docker/no_vnc.sh $SCRIPTSDIR/
-RUN $SCRIPTSDIR/no_vnc.sh
+RUN chmod +x $SCRIPTSDIR/no_vnc.sh && $SCRIPTSDIR/no_vnc.sh
 
 ###################################
 
