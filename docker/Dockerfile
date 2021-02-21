@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 RUN pip install --upgrade pip
 
 # cantools dropped support for Python2 in its latest release
-RUN pip install --user python-can cantools==32.20.1 rdp osqp==0.6.1 pathlib pyyaml
+RUN pip install --user python-can cantools==32.20.1 rdp osqp==0.6.1 pathlib pyyaml casadi
 
 RUN pip install --user --upgrade numpy
 
