@@ -1,12 +1,14 @@
 .PHONY: bash test image
 
 
-FS_VOLUME = kthfsdv
+FS_WORKSPACE_VOLUME = kthfsdv
+FS_PROFILE_VOLUME = kthfsdvpf
 CONTAINER_NAME = arcs
 DOCKER_RUN_OPTIONS = \
 	-p 5901:5901 -p 6901:6901 \
 	--name=${CONTAINER_NAME} \
-	--volume="${FS_VOLUME}:/home/fs_workspace" \
+	--volume="${FS_PROFILE_VOLUME}:/root" \
+	--volume="${FS_WORKSPACE_VOLUME}:/home/fs_workspace" \
 	--volume="${CURDIR}:/home/fs_workspace/src"
 DOCKER_IMAGE_NAME = kthfsdv/arcs:latest
 
@@ -42,4 +44,4 @@ test:
 
 # Only run this if your really need to build the image on your local computer
 image:
-	docker build -t kthfsdv/arcs:latest -f docker/Dockerfile .
+	docker build -t $(DOCKER_IMAGE_NAME) -f .docker/Dockerfile .

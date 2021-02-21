@@ -29,3 +29,4 @@ __pycache__/
 # Keep track of setup.py changes (used for catkin build)
 !**/setup.py
 
+.docker/Dockerfile
