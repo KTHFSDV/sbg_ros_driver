@@ -39,8 +39,10 @@ update:
 	@docker pull $(DOCKER_IMAGE_NAME)
 
 test:
-	docker run --rm $(DOCKER_RUN_OPTIONS) \
-			$(DOCKER_IMAGE_NAME) bash
+	docker run --rm \
+		   $(DOCKER_RUN_OPTIONS) \
+		   $(DOCKER_IMAGE_NAME) \
+		   bash -c "source /opt/ros/melodic/setup.bash && catkin build"
 
 # Only run this if your really need to build the image on your local computer
 image:

@@ -26,15 +26,6 @@ then
   printf "Done.\n"
 fi
 
-if [ ! -d "build" ]; then
-  # No exit on error
-  set +e
-
-  echo "Running catkin build ..."
-  source /opt/ros/melodic/setup.bash
-  catkin build || printf "\nThe build has failed !!!\n\n"
-fi
-
 printf "Your workspace is now ready.\n\n"
 
 exec "$@"
