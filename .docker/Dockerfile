@@ -3,7 +3,7 @@
 FROM ros:melodic as base
 
 ENV FS_WORKSPACE=/home/fs_workspace/
-ENV CATKIN_BLACKLISTED_PACKAGES="gtsam zed_nodelets zed_wrapper"
+ENV CATKIN_BLACKLISTED_PACKAGES="gtsam zed_nodelets zed_wrapper ouster_ros opencv_tests vision_opencv image_geometry cv_bridge"
 ENV ROS_LIB_FOLDER=/opt/ros/melodic/lib
 ENV ROS_HOSTNAME=localhost
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
