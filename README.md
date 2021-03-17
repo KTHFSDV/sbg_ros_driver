@@ -17,6 +17,7 @@ For development, we use docker. If you are new to this tool, please check the [b
 1. Install docker
 
 https://docs.docker.com/engine/install/ubuntu/
+
 https://docs.docker.com/engine/install/linux-postinstall/
 
 2. Verify docker version (need at least 19.03)
