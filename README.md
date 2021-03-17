@@ -56,6 +56,11 @@ During development, there is always a need to run `catkin build` to rebuild cert
 This command is automatically run the first time you run a container, but you'll need to run it
 more frequently yourself as you are making changes to your code. 
 
+Move to the main directory of your local ARCS.
+```
+cd /<path-to-ARCS>/ARCS
+```
+
 Start a container using VNC as a graphical environment (recommended if your host OS is not Ubuntu):
 ```
 make
