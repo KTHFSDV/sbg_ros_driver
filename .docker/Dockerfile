@@ -63,7 +63,7 @@ RUN mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml \
 ADD .docker/startup.sh $STARTUPDIR/
 ADD .docker/custom_vnc_lite.html $NO_VNC_HOME/vnc_lite.html
 RUN chmod +x $STARTUPDIR/startup.sh
-RUN echo "source $/opt/ros/melodic/setup.bash 2> /dev/null || true" >> ~/.bashrc
+RUN echo "source /opt/ros/melodic/setup.bash 2> /dev/null || true" >> ~/.bashrc
 RUN echo "source ${FS_WORKSPACE}/devel/setup.bash 2> /dev/null || true" >> ~/.bashrc
 
 RUN --mount=target=src/,type=bind,source=. rosdep install --from-paths src/ --ignore-src -y -r
