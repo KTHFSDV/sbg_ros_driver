@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find vehicle)/launch/fs_simulation.launch" >
+		<arg name="rviz" value="false" />
+	</include>	
+	
+	<test test-name="my_ex_test" pkg="test" type="example_test.py" time-limit="400"/> 
+	
+</launch>
