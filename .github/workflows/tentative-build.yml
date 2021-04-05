@@ -1,5 +1,7 @@
-# Update submodules, build Docker image, push it to DockerHub, and run a project build.
-# This will run every sunday at midnight.
+# Update submodules, build Docker image, and run a project build.
+# This will run on every pull request to the 'devel' branch.
+# NB: This does not push updates to submodules nor does it push
+#     the built docker image to dockerhub
 
 name: Build ARCS [TENTATIVE]
 
@@ -18,7 +20,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0
           token: ${{ secrets.PAT }}
-          ref: devel
+          ref: $GITHUB_REF
 
       - name: Update submodules
         run: git submodule update --remote
