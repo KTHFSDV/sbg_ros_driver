@@ -23,7 +23,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     ros-melodic-rviz \
     ros-melodic-plotjuggler-ros
 
-RUN pip install --upgrade pip
+RUN pip install pip==20.3.4
 ADD .docker/requirements.txt $FS_WORKSPACE
 RUN pip install -r $FS_WORKSPACE/requirements.txt
 RUN pip install --upgrade numpy
