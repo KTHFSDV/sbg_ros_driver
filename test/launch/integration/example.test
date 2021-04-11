@@ -3,7 +3,11 @@
 	<include file="$(find vehicle)/launch/fs_simulation.launch" >
 		<arg name="rviz" value="false" />
 	</include>	
-	
-	<test test-name="my_ex_test" pkg="test" type="example_test.py" time-limit="400"/> 
-	
+
+	<arg name="test-time-limit" default="60" />
+
+	<test test-name="my_ex_test" pkg="test" type="example_test.py" time-limit="$(arg test-time-limit)">	
+		<param name="time-limit" value="$(arg test-time-limit)" />
+	</test>
+
 </launch>
