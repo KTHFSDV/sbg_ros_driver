@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find vehicle)/launch/fs_simulation.launch" >
+		<arg name="rviz" value="false" />
+	</include>	
+
+	<arg name="test-time-limit" default="300" />
+
+	<test test-name="stop_start_test" pkg="test" type="stop_start_test.py" time-limit="$(arg test-time-limit)">	
+		<param name="time-limit" value="$(arg test-time-limit)" />
+	</test>
+
+</launch>
