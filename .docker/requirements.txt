@@ -1,0 +1,8 @@
+# cantools and osqp dropped support for Python2 in their latest releases
+python-can
+cantools==32.20.1
+rdp
+osqp==0.6.1
+pathlib
+pyyaml
+casadi

@@ -24,7 +24,7 @@
 	branch = devel
 [submodule "sensors/zed-ros-wrapper"]
 	path = sensors/zed-ros-wrapper
-	url = git@github.com:stereolabs/zed-ros-wrapper.git
+	url = git@github.com:KTHFSDV/zed-ros-wrapper.git
 	branch = master
 [submodule "navigation"]
 	path = navigation
@@ -34,3 +34,9 @@
 	path = perception
 	url = git@github.com:KTHFSDV/perception.git
 	branch = devel
+[submodule "sensors/ouster_example"]
+	path = sensors/ouster_example
+	url = git@github.com:KTHFSDV/ouster_example.git
+[submodule "sensors/vision_opencv"]
+	path = sensors/vision_opencv
+	url = git@github.com:ros-perception/vision_opencv.git

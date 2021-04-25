@@ -17,6 +17,7 @@ For development, we use docker. If you are new to this tool, please check the [b
 1. Install docker
 
 https://docs.docker.com/engine/install/ubuntu/
+
 https://docs.docker.com/engine/install/linux-postinstall/
 
 2. Verify docker version (need at least 19.03)
@@ -41,8 +42,7 @@ sudo systemctl restart docker
 4. Clone this repository and initialize the submodules
 
 ```
-git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch docker
-git submodule update --init --recursive
+git clone git@github.com:KTHFSDV/ARCS.git --recursive --branch devel
 ```
 
 5. Pull the docker image (which will also build the ROS packages in the image)
@@ -56,6 +56,11 @@ docker pull kthfsdv/arcs:latest
 During development, there is always a need to run `catkin build` to rebuild certain ROS packages.
 This command is automatically run the first time you run a container, but you'll need to run it
 more frequently yourself as you are making changes to your code. 
+
+Move to the main directory of your local ARCS.
+```
+cd /<path-to-ARCS>/ARCS
+```
 
 Start a container using VNC as a graphical environment (recommended if your host OS is not Ubuntu):
 ```

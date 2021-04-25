@@ -2,6 +2,13 @@
 
 FROM ros:melodic as base
 
+ENV FS_WORKSPACE=/home/fs_workspace/
+ENV CATKIN_BLACKLISTED_PACKAGES="gtsam zed_nodelets zed_wrapper ouster_ros opencv_tests vision_opencv image_geometry cv_bridge"
+ENV ROS_LIB_FOLDER=/opt/ros/melodic/lib
+ENV ROS_HOSTNAME=localhost
+ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     doxygen \
     freeglut3-dev \
@@ -13,14 +20,13 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     python-scipy python-pip \
     qtbase5-dev \
     vim \
-    ros-melodic-rviz
+    ros-melodic-rviz \
+    ros-melodic-plotjuggler-ros
 
-RUN pip install --upgrade pip
-
-# cantools dropped support for Python2 in its latest release
-RUN pip install --user python-can cantools==32.20.1 rdp osqp==0.6.1 pathlib pyyaml
-
-RUN pip install --user --upgrade numpy
+RUN pip install pip==20.3.4
+ADD .docker/requirements.txt $FS_WORKSPACE
+RUN pip install -r $FS_WORKSPACE/requirements.txt
+RUN pip install --upgrade numpy
 
 SHELL ["/bin/bash", "-c"]
 
@@ -41,29 +47,25 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     xfce4-goodies \
     wget
 EXPOSE $VNC_PORT $NO_VNC_PORT
-ADD ./docker/no_vnc.sh $SCRIPTSDIR/
-RUN $SCRIPTSDIR/no_vnc.sh
+ADD .docker/no_vnc.sh $SCRIPTSDIR/
+RUN chmod +x $SCRIPTSDIR/no_vnc.sh && $SCRIPTSDIR/no_vnc.sh
 
 ###################################
 
-ENV ROS_WORKSPACE=/home/fs_workspace/
-ENV BLACKLISTED_PACKAGES="gtsam zed_nodelets zed_wrapper"
-ENV ROS_LIB_FOLDER=/opt/ros/melodic/lib
-ENV ROS_HOSTNAME=localhost
-ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
-ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+WORKDIR $FS_WORKSPACE
 
-WORKDIR $ROS_WORKSPACE
-
-RUN catkin config --blacklist $BLACKLISTED_PACKAGES
+RUN catkin config --blacklist $CATKIN_BLACKLISTED_PACKAGES
 
 # Run VNC && noVNC
 # Auto set defaults for xfce panels
 RUN mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml \
  && cp /etc/xdg/xfce4/panel/default.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
 
-ADD ./docker/startup.sh $STARTUPDIR/
-ADD ./docker/custom_vnc_lite.html $NO_VNC_HOME/vnc_lite.html
+ADD .docker/startup.sh $STARTUPDIR/
+ADD .docker/custom_vnc_lite.html $NO_VNC_HOME/vnc_lite.html
+RUN chmod +x $STARTUPDIR/startup.sh
+RUN echo "source /opt/ros/melodic/setup.bash 2> /dev/null || true" >> ~/.bashrc
+RUN echo "source ${FS_WORKSPACE}/devel/setup.bash 2> /dev/null || true" >> ~/.bashrc
 
 RUN --mount=target=src/,type=bind,source=. rosdep install --from-paths src/ --ignore-src -y -r
 
