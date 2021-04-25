@@ -36,3 +36,6 @@ jobs:
 
       - name: Run 'catkin build'
         run: make test
+
+      - name: Run integration tests
+        run: make integration_test
