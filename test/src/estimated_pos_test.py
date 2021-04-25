@@ -21,7 +21,7 @@ from test_commons import TestCommons
 class EstimatedPosTest(TestCommons):
     
     def setUp(self):
-        super(ExampleTest, self).setUp()
+        super(EstimatedPosTest, self).setUp()
 
         self.rate = rospy.Rate(10)
 
@@ -30,7 +30,7 @@ class EstimatedPosTest(TestCommons):
         
 
     def tearDown(self):
-        super(ExampleTest, self).tearDown()
+        super(EstimatedPosTest, self).tearDown()
 
 
     def _path_cb(self, data):
@@ -69,5 +69,5 @@ if __name__ == '__main__':
     import rostest
     rospy.init_node(NAME, anonymous=True)
 
-    rostest.rosrun(PKG, NAME, ExampleTest)
+    rostest.rosrun(PKG, NAME, EstimatedPosTest)
 
