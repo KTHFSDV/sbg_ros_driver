@@ -4,10 +4,10 @@ LAUNCH_DIR := ./launch
 
 tests := $(wildcard $(LAUNCH_DIR)/*)
 
-run_all: tests 
+run_tests: tests 
 
 
-run_all:
+run_tests:
 	$(foreach test, $(tests), rostest $(test);)
 
 
