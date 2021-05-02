@@ -6,8 +6,8 @@
 name: Build ARCS [TENTATIVE]
 
 on:
-  push:
-      branches: [ testing ]
+  pull_request:
+      branches: [ devel ]
 
 jobs:
   build_image:
