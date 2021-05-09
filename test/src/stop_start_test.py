@@ -50,8 +50,6 @@ class StopStartTest(TestCommons):
 
         self.rate = rospy.Rate(frequency)
         
-#        initial_speed = self.slam_odom.twist.twist.linear.x 
-        
 
         for i in range(time_limit * frequency):
            s = self.slam_odom.twist.twist.linear.x 
