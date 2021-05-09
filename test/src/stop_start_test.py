@@ -29,7 +29,7 @@ class StopStartTest(TestCommons):
         """
             Test that the car is able to come to a full stop within
             some time frame, and then restart again. The test is run
-            during the second lap, when the speed of the car is faster.
+            during the second lap. 
             
         """
 
