@@ -9,5 +9,4 @@
   <test test-name="stop_start_test" pkg="test" type="stop_start_test.py" time-limit="$(arg test-time-limit)">
     <param name="time-limit" value="$(arg test-time-limit)" />
   </test>
-
 </launch>

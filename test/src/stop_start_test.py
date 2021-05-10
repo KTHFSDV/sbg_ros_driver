@@ -40,7 +40,6 @@ class StopStartTest(TestCommons):
 
         self.rate = rospy.Rate(frequency)
         
-
         for i in range(time_limit * frequency):
            s = self.slam_odom.twist.twist.linear.x 
            if -eps <= s <= eps:
@@ -64,7 +63,6 @@ class StopStartTest(TestCommons):
             self.rate.sleep()
 
         self.assertTrue(restarted, ('The car did not restart within {:d} s'.format(time_limit)))
-
 
 if __name__ == '__main__':
     test_name = os.path.basename(__file__)

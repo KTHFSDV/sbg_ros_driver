@@ -53,7 +53,6 @@ class EstimatedPosTest(TestCommons):
         self.assertTrue(x_diff < eps, ('X pos difference between estimated and expected {:.5f}').format(x_diff))
         self.assertTrue(y_diff < eps, ('Y pos difference between estimated and expected {:.5f}').format(y_diff))
 
-
 if __name__ == '__main__':
     test_name = os.path.basename(__file__)
     rospy.init_node(test_name, anonymous=True)
