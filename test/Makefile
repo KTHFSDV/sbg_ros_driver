@@ -9,7 +9,3 @@ run_tests: tests
 
 run_tests:
 	$(foreach test, $(tests), rostest $(test) || exit 1;)
-
-
-
-
