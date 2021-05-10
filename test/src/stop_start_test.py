@@ -1,15 +1,11 @@
 #!/usr/bin/env python
+import os
 
-
-PKG='test'
-NAME='stop_start_test'
-
-
-import unittest
 import rospy
+import rostest
 from std_msgs.msg import Bool
-from test_commons import TestCommons
 
+from test_commons import TestCommons
 
 class StopStartTest(TestCommons):
     
@@ -21,10 +17,6 @@ class StopStartTest(TestCommons):
         self.stop_pub = rospy.Publisher('/stop_car_request', Bool, queue_size=1)
         self.start_pub = rospy.Publisher('/start_car_request', Bool, queue_size=1)
 
-        
-    def tearDown(self):
-        super(StopStartTest, self).tearDown()
-
     def test_stop(self):
         """
             Test that the car is able to come to a full stop within
@@ -32,8 +24,6 @@ class StopStartTest(TestCommons):
             during the second lap. 
             
         """
-
-
         while self.lap_count < 2: 
             self.rate.sleep()
 
@@ -75,11 +65,9 @@ class StopStartTest(TestCommons):
 
         self.assertTrue(restarted, ('The car did not restart within {:d} s'.format(time_limit)))
 
-            
+
 if __name__ == '__main__':
-    import rostest
-    rospy.init_node(NAME, anonymous=True)
+    test_name = os.path.basename(__file__)
+    rospy.init_node(test_name, anonymous=True)
 
-    rostest.rosrun(PKG, NAME, StopStartTest)
-
-
+    rostest.rosrun('test', test_name, StopStartTest)

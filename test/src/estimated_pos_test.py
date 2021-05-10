@@ -1,22 +1,17 @@
 #!/usr/bin/env python
-
 """
     Test if the estimated position of the car is 
     within some epsilon to what is expected 
     after three laps (i.e. the first point on the planned path).
 """
 
+import os 
 
-
-PKG='test'
-NAME='estimated_pos_test'
-
-
-import unittest
 import rospy
+import rostest
 from fs_msgs.msg import PlannedPath
-from test_commons import TestCommons
 
+from test_commons import TestCommons
 
 class EstimatedPosTest(TestCommons):
     
@@ -28,18 +23,12 @@ class EstimatedPosTest(TestCommons):
         self.init_path_pos = None  # Holds the first point on the path 
         rospy.Subscriber('/navigation/path_planner/path', PlannedPath, self._path_cb) 
         
-
-    def tearDown(self):
-        super(EstimatedPosTest, self).tearDown()
-
-
     def _path_cb(self, data):
         """
             For this test we only need the initial position of the path 
         """
         if data.x and data.y: 
             self.init_path_pos = (data.x[0], data.y[0])
-
 
     def test_est_to_path(self):
         """
@@ -66,8 +55,7 @@ class EstimatedPosTest(TestCommons):
 
 
 if __name__ == '__main__':
-    import rostest
-    rospy.init_node(NAME, anonymous=True)
+    test_name = os.path.basename(__file__)
+    rospy.init_node(test_name, anonymous=True)
 
-    rostest.rosrun(PKG, NAME, EstimatedPosTest)
-
+    rostest.rosrun('test', test_name, EstimatedPosTest)
