@@ -1,11 +1,6 @@
-.PHONY: run_all tests
+.PHONY: run_tests
 
-LAUNCH_DIR := ./launch
-
-tests := $(wildcard $(LAUNCH_DIR)/*)
-
-run_tests: tests 
-
+tests := $(wildcard $(shell rospack find test)/launch/*.test)
 
 run_tests:
 	$(foreach test, $(tests), rostest $(test) || exit 1;)
