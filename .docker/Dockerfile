@@ -9,6 +9,10 @@ ENV ROS_HOSTNAME=localhost
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
+# Fix ros key
+# NOTE: Needed because of this bug https://github.com/osrf/docker_images/issues/535
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     doxygen \
     freeglut3-dev \
