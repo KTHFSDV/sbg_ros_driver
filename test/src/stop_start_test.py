@@ -25,7 +25,13 @@ class StopStartTest(TestCommons):
             
         """
         while self.lap_count < 2: 
-            self.rate.sleep()
+            try:
+                self.rate.sleep()
+            except rospy.exceptions.ROSInterruptException as e:
+                rospy.loginfo(
+                        '[stop_start_test] Exception: {}'
+                        .format(e)
+                )
 
         # Then do test 
         # Perhaps the ground truth should be used
@@ -41,11 +47,17 @@ class StopStartTest(TestCommons):
         self.rate = rospy.Rate(frequency)
         
         for i in range(time_limit * frequency):
-           s = self.slam_odom.twist.twist.linear.x 
-           if -eps <= s <= eps:
-               has_stopped = True
-               break
-           self.rate.sleep()
+            s = self.slam_odom.twist.twist.linear.x
+            if -eps <= s <= eps:
+                has_stopped = True
+                break
+            try:
+                self.rate.sleep()
+            except rospy.exceptions.ROSInterruptException as e:
+                rospy.loginfo(
+                        '[stop_start_test] Exception: {}'
+                        .format(e)
+                )
 
         self.assertTrue(has_stopped, ('The car did not come to a comlete stop within {:d} s'
             .format(time_limit)))
@@ -57,10 +69,16 @@ class StopStartTest(TestCommons):
         
         for i in range(time_limit * frequency):
             s = self.slam_odom.twist.twist.linear.x
-            if  abs(s) > 1: # idk
+            if  abs(s) > 1: # arbitrary
                 restarted = True
                 break
-            self.rate.sleep()
+            try:
+                self.rate.sleep()
+            except rospy.exceptions.ROSInterruptException as e:
+                rospy.loginfo(
+                        '[stop_start_test] Exception: {}'
+                        .format(e)
+                )
 
         self.assertTrue(restarted, ('The car did not restart within {:d} s'.format(time_limit)))
 

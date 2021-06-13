@@ -38,7 +38,14 @@ class EstimatedPosTest(TestCommons):
 
         # Run test when we reach lap 3 
         while self.lap_count < 3: 
-            self.rate.sleep()
+            try:
+                self.rate.sleep()
+            except rospy.exceptions.ROSInterruptException as e:
+                rospy.loginfo(
+                        '[est_to_path_test] Exception: {}'
+                        .format(e)
+                )
+
 
         # Then do test 
         est = self.slam_odom.pose.pose.position
