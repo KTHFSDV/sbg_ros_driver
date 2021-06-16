@@ -1,4 +1,4 @@
-.PHONY: bash test image
+.PHONY: bash test image integration_test
 
 
 FS_WORKSPACE_VOLUME = kthfsdv
@@ -43,6 +43,12 @@ test:
 		   $(DOCKER_RUN_OPTIONS) \
 		   $(DOCKER_IMAGE_NAME) \
 		   bash -c "source /opt/ros/melodic/setup.bash && catkin build"
+
+integration_test:
+	docker run --rm \
+		   $(DOCKER_RUN_OPTIONS) \
+		   $(DOCKER_IMAGE_NAME) \
+		   bash -c "catkin build && source devel/setup.bash && cd src/test/ && make run_tests"
 
 # Only run this if your really need to build the image on your local computer
 image:
