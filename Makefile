@@ -48,7 +48,7 @@ integration_test:
 	docker run --rm \
 		   $(DOCKER_RUN_OPTIONS) \
 		   $(DOCKER_IMAGE_NAME) \
-		   bash -c "source devel/setup.bash && catkin build && cd src/test/ && make run_tests"
+		   bash -c "source /opt/ros/melodic/setup.bash && catkin build && source devel/setup.bash && cd src/test/ && make run_tests"
 
 # Only run this if your really need to build the image on your local computer
 image:
