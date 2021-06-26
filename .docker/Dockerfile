@@ -3,7 +3,7 @@
 FROM ros:melodic as base
 
 ENV FS_WORKSPACE=/home/fs_workspace/
-ENV CATKIN_BLACKLISTED_PACKAGES="gtsam zed_nodelets zed_wrapper ouster_ros opencv_tests vision_opencv image_geometry cv_bridge"
+ENV CATKIN_BLACKLISTED_PACKAGES="zed_nodelets zed_wrapper ouster_ros opencv_tests vision_opencv image_geometry cv_bridge"
 ENV ROS_LIB_FOLDER=/opt/ros/melodic/lib
 ENV ROS_HOSTNAME=localhost
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
@@ -13,6 +13,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPA
 # NOTE: Needed because of this bug https://github.com/osrf/docker_images/issues/535
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
+RUN apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:borglab/gtsam-release-4.0
+
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     doxygen \
     freeglut3-dev \
@@ -20,6 +22,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     libpcl-dev \
     libqglviewer-dev-qt5 \
     libqglviewer-headers \
+    libgtsam-dev \
+    libgtsam-unstable-dev \
     python-catkin-tools \
     python-scipy python-pip \
     qtbase5-dev \
