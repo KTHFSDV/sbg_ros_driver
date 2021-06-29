@@ -31,6 +31,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     ros-melodic-rviz \
     ros-melodic-plotjuggler-ros
 
+# Rename GTSAMConfig.cmake to gtsamConfig.ckame
+RUN cp /usr/lib/cmake/GTSAM/GTSAMConfig.cmake /usr/lib/cmake/GTSAM/gtsamConfig.cmake
+
 RUN pip install pip==20.3.4
 ADD .docker/requirements.txt $FS_WORKSPACE
 RUN pip install -r $FS_WORKSPACE/requirements.txt
