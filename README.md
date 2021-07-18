@@ -8,6 +8,9 @@ For more information refer to the READMEs of the respective submodules.
 
 This repository mostly includes folders and [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Submodules are basically linked repositories inside a repository. This repository will always link to a certain state of all the submodules it refers to. Normally this should be the most-up-to-date master commit of the submodule, but when a repository updates a master this one will not automatically update with it. For now, this will manually be fixed as fast as possible (at least once a week). This slows down the development a bit, but on the other hand creates an extra opportunity to test the integration of new components into the whole system, whenever this repository updates all its submodules.
 
+## System Overview
+![Simulation Pipeline](docs/simulation_diagram.png)
+
 ## Development
 
 For development, we use docker. If you are new to this tool, please check the [basic tutorials](https://docs.docker.com/get-started/).
