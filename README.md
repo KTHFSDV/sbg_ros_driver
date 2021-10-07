@@ -17,6 +17,8 @@ For development, we use docker. If you are new to this tool, please check the [b
 
 ### Setup
 
+0. If you're on Windows (not using the Windows Subsystem for Linux), make sure to [install `make` first](http://gnuwin32.sourceforge.net/packages/make.htm). Choose the setup for "Complete package, except sources".
+
 1. Install docker
 
 https://docs.docker.com/engine/install/ubuntu/
