@@ -41,3 +41,6 @@
 	path = sensors/vision_opencv
 	url = git@github.com:ros-perception/vision_opencv.git
 	branch = melodic
+[submodule "fs_common"]
+	path = fs_common
+	url = git@github.com:KTHFSDV/fs_common.git
