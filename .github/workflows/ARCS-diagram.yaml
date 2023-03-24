@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@master
         with:
           submodules: recursive
+          token: ${{ secrets.PAT_TOKEN }}
       - name: Update diagram
         uses: githubocto/repo-visualizer@0.7.1
         with:
