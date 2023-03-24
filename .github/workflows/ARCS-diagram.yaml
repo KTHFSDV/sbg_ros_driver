@@ -19,5 +19,5 @@ jobs:
         with:
           output_file: "ARCS-diagram.svg"
           excluded_paths: "sensors, slam/graphslam/gtsam"
-          max_depth: 5
+          max_depth: 4
     
