@@ -1,0 +1,24 @@
+name: ARCS Diagram updater
+
+on:
+  push:
+    paths-ignore:
+      - 'ARCS-diagram.svg'
+
+jobs:
+
+  update-diagram:
+    name: Diagram update
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+        with:
+          submodules: recursive
+          token: ${{ secrets.PAT }}
+      - name: Update diagram
+        uses: githubocto/repo-visualizer@0.7.1
+        with:
+          output_file: "ARCS-diagram.svg"
+          excluded_paths: "sensors, slam/graphslam/gtsam"

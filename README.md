@@ -1,8 +1,11 @@
-# Autonomous System 2018/2019 (as1819)
+# Autonomous System
 
 This repository will bundle all required repositories to run simulations and run the actual system on the car, edited to work for Windows and Mac. Instead of running rviz natively, this solution uses VNC to run it. The goal of this is to facilitate and streamline the setup process and to make it easier for new members to start developing. For this reason this repository will also include some high level guides on how to setup the system, run it, and will also give a high level overview of all the components.
 
 For more information refer to the READMEs of the respective submodules.
+
+A visualisation of the ARCS codebase can be seen below. Dots in the image are files color-coded by file extension.
+![Visualization of the codebase](./ARCS-diagram.svg)
 
 ## Overview
 
