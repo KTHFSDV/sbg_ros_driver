@@ -4,7 +4,7 @@ This repository will bundle all required repositories to run simulations and run
 
 For more information refer to the READMEs of the respective submodules.
 
-Below a visualisation of the ARCS codebase can be seen. Dots in the image are files color-coded by file extension.
+A visualisation of the ARCS codebase can be seen below. Dots in the image are files color-coded by file extension.
 ![Visualization of the codebase](./ARCS-diagram.svg)
 
 ## Overview
