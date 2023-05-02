@@ -44,3 +44,6 @@
 [submodule "fs_common"]
 	path = fs_common
 	url = git@github.com:KTHFSDV/fs_common.git
+[submodule "ros2can"]
+	path = ros2can
+	url = git@github.com:KTHFSDV/ros2can.git
