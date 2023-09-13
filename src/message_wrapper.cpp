@@ -565,10 +565,6 @@ const sbg_driver::SbgEkfEuler MessageWrapper::createSbgEkfEulerMessage(const Sbg
 
   if (m_use_enu_)
   {
-    // ekf_euler_message.angle.x  = ref_log_ekf_euler.euler[0];
-    // ekf_euler_message.angle.y  = -ref_log_ekf_euler.euler[1];
-    // ekf_euler_message.angle.z  = wrapAngle2Pi((SBG_PI_F / 2.0f) - ref_log_ekf_euler.euler[2]);
-    // CORRECTED
     ekf_euler_message.angle.x  = ref_log_ekf_euler.euler[0];             // Roll remains the same
     ekf_euler_message.angle.y  = -ref_log_ekf_euler.euler[1];            // Pitch is inverted
     ekf_euler_message.angle.z  = wrapAngle2Pi((SBG_PI_F / 2.0f) - ref_log_ekf_euler.euler[2]); // Yaw is subtracted from π/2 and then wrapped
@@ -603,9 +599,6 @@ const sbg_driver::SbgEkfNav MessageWrapper::createSbgEkfNavMessage(const SbgLogE
 
   if (m_use_enu_)
   {
-    // ekf_nav_message.velocity.x = ref_log_ekf_nav.velocity[1];
-    // ekf_nav_message.velocity.y = ref_log_ekf_nav.velocity[0];
-    // ekf_nav_message.velocity.z = -ref_log_ekf_nav.velocity[2];
     ekf_nav_message.velocity.x = ref_log_ekf_nav.velocity[1];
     ekf_nav_message.velocity.y = ref_log_ekf_nav.velocity[0];
     ekf_nav_message.velocity.z = -ref_log_ekf_nav.velocity[2];
@@ -650,10 +643,6 @@ const sbg_driver::SbgEkfQuat MessageWrapper::createSbgEkfQuatMessage(const SbgLo
 
   if (m_use_enu_)
   {
-    // ekf_quat_message.quaternion.x = ref_log_ekf_quat.quaternion[1];
-    // ekf_quat_message.quaternion.y = -ref_log_ekf_quat.quaternion[2];
-    // ekf_quat_message.quaternion.z = -ref_log_ekf_quat.quaternion[3];
-    // ekf_quat_message.quaternion.w = ref_log_ekf_quat.quaternion[0];
     ekf_quat_message.quaternion.x = ref_log_ekf_quat.quaternion[2];
     ekf_quat_message.quaternion.y = ref_log_ekf_quat.quaternion[1];
     ekf_quat_message.quaternion.z = -ref_log_ekf_quat.quaternion[3];
@@ -772,10 +761,6 @@ const sbg_driver::SbgGpsVel MessageWrapper::createSbgGpsVelMessage(const SbgLogG
 
   if (m_use_enu_)
   {
-    // gps_vel_message.velocity.x = ref_log_gps_vel.velocity[1];
-    // gps_vel_message.velocity.y = ref_log_gps_vel.velocity[0];
-    // gps_vel_message.velocity.z = -ref_log_gps_vel.velocity[2];
-
     gps_vel_message.velocity.x = ref_log_gps_vel.velocity[1];
     gps_vel_message.velocity.y = ref_log_gps_vel.velocity[0];
     gps_vel_message.velocity.z = -ref_log_gps_vel.velocity[2];
@@ -813,21 +798,6 @@ const sbg_driver::SbgImuData MessageWrapper::createSbgImuDataMessage(const SbgLo
 
   if (m_use_enu_)
   {
-    // imu_data_message.accel.x        = ref_log_imu_data.accelerometers[0];
-    // imu_data_message.accel.y        = -ref_log_imu_data.accelerometers[1];
-    // imu_data_message.accel.z        = -ref_log_imu_data.accelerometers[2];
-
-    // imu_data_message.gyro.x         = ref_log_imu_data.gyroscopes[0];
-    // imu_data_message.gyro.y         = -ref_log_imu_data.gyroscopes[1];
-    // imu_data_message.gyro.z         = -ref_log_imu_data.gyroscopes[2];
-
-    // imu_data_message.delta_vel.x    = ref_log_imu_data.deltaVelocity[0];
-    // imu_data_message.delta_vel.y    = -ref_log_imu_data.deltaVelocity[1];
-    // imu_data_message.delta_vel.z    = -ref_log_imu_data.deltaVelocity[2];
-
-    // imu_data_message.delta_angle.x  = ref_log_imu_data.deltaAngle[0];
-    // imu_data_message.delta_angle.y  = -ref_log_imu_data.deltaAngle[1];
-    // imu_data_message.delta_angle.z  = -ref_log_imu_data.deltaAngle[2];
     imu_data_message.accel.x        = ref_log_imu_data.accelerometers[1];
     imu_data_message.accel.y        = ref_log_imu_data.accelerometers[0];
     imu_data_message.accel.z        = -ref_log_imu_data.accelerometers[2];
@@ -877,14 +847,6 @@ const sbg_driver::SbgMag MessageWrapper::createSbgMagMessage(const SbgLogMag& re
 
   if (m_use_enu_)
   {
-    // mag_message.mag.x   = ref_log_mag.magnetometers[0];
-    // mag_message.mag.y   = -ref_log_mag.magnetometers[1];
-    // mag_message.mag.z   = -ref_log_mag.magnetometers[2];
-
-    // mag_message.accel.x = ref_log_mag.accelerometers[0];
-    // mag_message.accel.y = -ref_log_mag.accelerometers[1];
-    // mag_message.accel.z = -ref_log_mag.accelerometers[2];
-
     mag_message.mag.x   = ref_log_mag.magnetometers[1];
     mag_message.mag.y   = ref_log_mag.magnetometers[0];
     mag_message.mag.z   = -ref_log_mag.magnetometers[2];
@@ -1031,19 +993,10 @@ const sbg_driver::SbgImuShort MessageWrapper::createSbgImuShortMessage(const Sbg
 
   if (m_use_enu_)
   {
-    // imu_short_message.delta_velocity.x  = ref_short_imu_log.deltaVelocity[0];
-    // imu_short_message.delta_velocity.y  = -ref_short_imu_log.deltaVelocity[1];
-    // imu_short_message.delta_velocity.z  = -ref_short_imu_log.deltaVelocity[2];
-
-    // imu_short_message.delta_angle.x     = ref_short_imu_log.deltaAngle[0];
-    // imu_short_message.delta_angle.y     = -ref_short_imu_log.deltaAngle[1];
-    // imu_short_message.delta_angle.z     = -ref_short_imu_log.deltaAngle[2];
-
     imu_short_message.delta_velocity.x  = ref_short_imu_log.deltaVelocity[1];
     imu_short_message.delta_velocity.y  = ref_short_imu_log.deltaVelocity[0];
     imu_short_message.delta_velocity.z  = -ref_short_imu_log.deltaVelocity[2];
     
-    // CORRECTED
     imu_short_message.delta_angle.x     = ref_short_imu_log.deltaAngle[0];
     imu_short_message.delta_angle.y     = -ref_short_imu_log.deltaAngle[1];
     imu_short_message.delta_angle.z     = -ref_short_imu_log.deltaAngle[2];
