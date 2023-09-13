@@ -565,9 +565,10 @@ const sbg_driver::SbgEkfEuler MessageWrapper::createSbgEkfEulerMessage(const Sbg
 
   if (m_use_enu_)
   {
-    ekf_euler_message.angle.x  = ref_log_ekf_euler.euler[1];
-    ekf_euler_message.angle.y  = ref_log_ekf_euler.euler[0];
-    ekf_euler_message.angle.z  = wrapAngle2Pi((SBG_PI_F / 2.0f) - ref_log_ekf_euler.euler[2]);
+    ekf_euler_message.angle.x  = ref_log_ekf_euler.euler[0];             // Roll remains the same
+    ekf_euler_message.angle.y  = -ref_log_ekf_euler.euler[1];            // Pitch is inverted
+    ekf_euler_message.angle.z  = wrapAngle2Pi((SBG_PI_F / 2.0f) - ref_log_ekf_euler.euler[2]); // Yaw is subtracted from π/2 and then wrapped
+ 
   }
   else
   {
@@ -809,8 +810,9 @@ const sbg_driver::SbgImuData MessageWrapper::createSbgImuDataMessage(const SbgLo
     imu_data_message.delta_vel.y    = ref_log_imu_data.deltaVelocity[0];
     imu_data_message.delta_vel.z    = -ref_log_imu_data.deltaVelocity[2];
 
-    imu_data_message.delta_angle.x  = ref_log_imu_data.deltaAngle[1];
-    imu_data_message.delta_angle.y  = ref_log_imu_data.deltaAngle[0];
+    // CORRECTED
+    imu_data_message.delta_angle.x  = ref_log_imu_data.deltaAngle[0];
+    imu_data_message.delta_angle.y  = -ref_log_imu_data.deltaAngle[1];
     imu_data_message.delta_angle.z  = -ref_log_imu_data.deltaAngle[2];
   }
   else
@@ -994,9 +996,9 @@ const sbg_driver::SbgImuShort MessageWrapper::createSbgImuShortMessage(const Sbg
     imu_short_message.delta_velocity.x  = ref_short_imu_log.deltaVelocity[1];
     imu_short_message.delta_velocity.y  = ref_short_imu_log.deltaVelocity[0];
     imu_short_message.delta_velocity.z  = -ref_short_imu_log.deltaVelocity[2];
-
-    imu_short_message.delta_angle.x     = ref_short_imu_log.deltaAngle[1];
-    imu_short_message.delta_angle.y     = ref_short_imu_log.deltaAngle[0];
+    
+    imu_short_message.delta_angle.x     = ref_short_imu_log.deltaAngle[0];
+    imu_short_message.delta_angle.y     = -ref_short_imu_log.deltaAngle[1];
     imu_short_message.delta_angle.z     = -ref_short_imu_log.deltaAngle[2];
   }
   else
